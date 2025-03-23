@@ -1,0 +1,334 @@
+/* Layout and Spacing */
+.py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.sm\:py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+.lg\:py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+.xl\:py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.max-w-7xl { max-width: 80rem; }
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.lg\:grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+.lg\:gap-x-16 { column-gap: 4rem; }
+.xl\:gap-x-24 { column-gap: 6rem; }
+.gap-y-12 { row-gap: 3rem; }
+.lg\:col-span-5 { grid-column: span 5 / span 5; }
+.xl\:pr-24 { padding-right: 6rem; }
+.pt-8 { padding-top: 2rem; }
+.mt-8 { margin-top: 2rem; }
+.border-t { border-top-width: 1px; }
+.border-black\/10 { border-color: rgb(0 0 0 / 0.1); }
+.sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.md\:mt-16 { margin-top: 4rem; }
+.xl\:mt-24 { margin-top: 6rem; }
+.md\:flex { display: flex; }
+.md\:hidden { display: none; }
+.md\:aspect-\[3\/4\] { aspect-ratio: 3 / 4; }
+.md\:h-6 { height: 1.5rem; }
+.md\:w-px { width: 1px; }
+.md\:max-w-none { max-width: none; }
+.md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.md\:flex-row { flex-direction: row; }
+.md\:gap-x-8 { column-gap: 2rem; }
+.md\:rounded-full { border-radius: 9999px; }
+.md\:border-black\/10 { border-color: rgb(0 0 0 / 0.1); }
+.md\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+.md\:pt-24 { padding-top: 6rem; }
+.md\:transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.lg\:left-1\/2 { left: 50%; }
+.lg\:col-span-3 { grid-column: span 3 / span 3; }
+.lg\:mx-0 { margin-left: 0px; margin-right: 0px; }
+.lg\:ml-0 { margin-left: 0px; }
+.lg\:mt-6 { margin-top: 1.5rem; }
+.lg\:mt-8 { margin-top: 2rem; }
+.lg\:flex { display: flex; }
+.lg\:max-w-none { max-width: none; }
+.lg\:flex-auto { flex: 1 1 auto; }
+.lg\:-\translate-x-1\/2 { --tw-translate-x: -50%; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.lg\:translate-y-0 { --tw-translate-y: 0px; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lg\:justify-start { justify-content: flex-start; }
+.lg\:gap-x-20 { column-gap: 5rem; }
+.lg\:gap-x-8 { column-gap: 2rem; }
+.lg\:rounded-2xl { border-radius: 1rem; }
+.lg\:p-4 { padding: 1rem; }
+.lg\:px-24 { padding-left: 6rem; padding-right: 6rem; }
+.lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+.lg\:py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+.lg\:py-32 { padding-top: 8rem; padding-bottom: 8rem; }
+.lg\:pb-40 { padding-bottom: 10rem; }
+.lg\:pr-24 { padding-right: 6rem; }
+.lg\:pt-0 { padding-top: 0px; }
+.lg\:text-left { text-align: left; }
+.lg\:text-5xl { font-size: 3rem; line-height: 1; }
+.lg\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.lg\:leading-8 { line-height: 2rem; }
+.xl\:gap-x-20 { column-gap: 5rem; }
+.xl\:gap-x-24 { column-gap: 6rem; }
+.xl\:py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+.xl\:py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.xl\:pr-24 { padding-right: 6rem; }
+.2xl\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+
+/* Typography */
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.font-semibold { font-weight: 600; }
+.text-sky-500 { color: var(--ai-create-color-theme-500); }
+.dark\:text-slate-400 { --tw-text-opacity: 1; color: rgb(203 213 225 / var(--tw-text-opacity)); }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.text-slate-900 { --tw-text-opacity: 1; color: rgb(15 23 42 / var(--tw-text-opacity)); }
+.dark\:text-slate-50 { --tw-text-opacity: 1; color: rgb(248 250 252 / var(--tw-text-opacity)); }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.sm\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.lg\:text-5xl { font-size: 3rem; line-height: 1; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.lg\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.lg\:pr-24 { padding-right: 6rem; }
+.lg\:mt-6 { margin-top: 1.5rem; }
+.lg\:leading-8 { line-height: 2rem; }
+.xl\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.2xl\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-slate-700 { --tw-text-opacity: 1; color: rgb(51 65 85 / var(--tw-text-opacity)); }
+.dark\:text-slate-300 { --tw-text-opacity: 1; color: rgb(203 213 225 / var(--tw-text-opacity)); }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.leading-7 { line-height: 1.75rem; }
+.text-slate-300 { --tw-text-opacity: 1; color: rgb(203 213 225 / var(--tw-text-opacity)); }
+.font-normal { font-weight: 400; }
+.text-white { --tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity)); }
+.hover\:text-sky-700:hover { color: var(--ai-create-color-theme-700); }
+.focus\:text-sky-500:focus { color: var(--ai-create-color-theme-500); }
+.focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
+.hover\:bg-sky-400:hover { background-color: var(--ai-create-color-theme-400); }
+.bg-sky-500 { background-color: var(--ai-create-color-theme-500); }
+.rounded-lg { border-radius: 0.5rem; }
+.transition-colors { transition-property: color, background-color, border-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.duration-500 { transition-duration: 500ms; }
+.inline-flex { display: inline-flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.sm\:text-base { font-size: 1rem; line-height: 1.5rem; }
+.flex { display: flex; }
+.items-start { align-items: flex-start; }
+.gap-2 { gap: 0.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.flex-shrink-0 { flex-shrink: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-1\.5 { margin-top: 0.375rem; }
+.mr-2 { margin-right: 0.5rem; }
+.text-black { --tw-text-opacity: 1; color: rgb(0 0 0 / var(--tw-text-opacity)); }
+.dark\:text-white { --tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity)); }
+.dark\:text-slate-200 { --tw-text-opacity: 1; color: rgb(226 232 240 / var(--tw-text-opacity)); }
+.dark\:hover\:text-white:hover { --tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity)); }
+.dark\:hover\:text-white\/60:hover { color: rgb(255 255 255 / 0.6); }
+.dark\:text-slate-500 { --tw-text-opacity: 1; color: rgb(100 116 139 / var(--tw-text-opacity)); }
+.dark\:bg-slate-800 { background-color: var(--ai-create-color-theme-800); }
+.dark\:border-white\/10 { border-color: rgb(255 255 255 / 0.1); }
+.dark\:text-slate-50 { --tw-text-opacity: 1; color: rgb(248 250 252 / var(--tw-text-opacity)); }
+.dark\:hover\:text-sky-500:hover { color: var(--ai-create-color-theme-500); }
+.dark\:hover\:text-white:hover { --tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity)); }
+.dark\:hover\:text-white\/60:hover { color: rgb(255 255 255 / 0.6); }
+.dark\:focus\:text-sky-500:focus { color: var(--ai-create-color-theme-500); }
+
+/* Images and Icons */
+.w-\[25rem\] { width: 25rem; }
+.h-\[37.5rem\] { height: 37.5rem; }
+.object-cover { object-fit: cover; }
+.aspect-\[4\/3\] { aspect-ratio: 4 / 3; }
+.bg-slate-100 { background-color: var(--ai-create-color-theme-100); }
+.rounded-lg { border-radius: 0.5rem; }
+
+
+
+
+<div id="root">
+<div class="w-full mx-auto max-w-7xl h-full gap-5 flex flex-col md:flex-row md:items-center" style="padding-top: 12px; padding-bottom: 12px;">
+  <div class="w-full h-full flex flex-col md:flex-row items-center justify-center text-sm leading-[17px] ">
+      
+      
+       
+        
+          <style>
+            @font-face {
+              font-family: 'DIN Next Pro';
+              src: url('path/to/din-next-pro-regular.woff2') format('woff2'),
+                   url('path/to/din-next-pro-regular.woff') format('woff');
+              font-weight: 400;
+              font-style: normal;
+            }
+            @font-face {
+              font-family: 'DIN Next Pro';
+              src: url('path/to/din-next-pro-bold.woff2') format('woff2'),
+                   url('path/to/din-next-pro-bold.woff') format('woff');
+              font-weight: 700;
+              font-style: normal;
+            }
+        #root {
+  width: 100%;
+  min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+  display: flex;
+  flex-direction: column;
+}
+
+
+            body {
+              font-family: 'DIN Next Pro', sans-serif;
+              font-size: 1.25rem;
+              line-height: 1.6;
+              margin: 0;
+              padding: 0;
+              background-color: #ffffff; /* Fondo blanco por defecto */
+            }
+        
+            h2, h3 {
+              text-transform: uppercase;
+            }
+        
+            .menu-fixed {
+              position: fixed;
+              top: 16px;
+              left: 0;
+              right: 0;
+              transform: translateY(0);
+              transition: transform 0.3s ease-in-out;
+              z-index: 50;
+              margin: 0 16px; /* Margen lateral consistente */
+            }
+        
+            .menu-hidden {
+              transform: translateY(calc(-100% - 16px));
+            }
+        
+            .header-container {
+              background-color: rgba(243, 244, 246, 0.9); /* bg-gray-100/90 */
+              border-radius: 1rem; /* rounded-2xl */
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* shadow-md */
+              padding: 12px 16px;
+            }
+        
+            /* Media Queries para responsividad */
+            /* Estilos base */
+.menu-content {
+display: flex; /* Visible por defecto en desktop */
+flex-direction: row;
+}
+
+/* Media query para móviles */
+@media (max-width: 768px) {
+#menu-content.menu-content.active {
+  display: flex;
+}
+}
+
+.menu-content.active {
+display: flex !important;
+}
+
+.menu-fixed {
+  margin: 0 8px;
+}
+
+
+@media (max-width: 768px) {
+.menu-content.active {
+  display: flex !important;
+}
+}
+
+          </style><!-- Botón de hamburguesa para móvil -->
+<div class="md:hidden">
+<button id="hamburger-btn">☰</button>
+</div>
+
+<!-- Menú desplegable para móvil -->
+<div id="mobile-menu" class="hidden md:hidden">
+<!-- Contenido del menú móvil aquí -->
+</div>
+          <!-- Importar Tailwind CSS (opcional si usas las clases) -->
+          <script src="https://cdn.tailwindcss.com"></script>
+        </head>
+        <body class="bg-white dark:bg-gray-900">
+          <header class="menu-fixed">
+            <div class="header-container">
+              <div class="w-full mx-auto max-w-7xl h-full flex items-center justify-between px-4">
+                <div class="flex items-center">
+                  <img class="object-cover" alt="Logo de Sport Elite Línea Deportiva" src="img/image.png" style="height: 50px;">
+                </div>
+                
+                <!-- Botón hamburguesa visible solo en móviles -->
+                <button class="md:hidden text-black" id="menu-toggle">
+                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                  </svg>
+                </button>
+        
+                <!-- Contenido del menú -->
+                <div class="menu-content flex-col md:flex-row items-center justify-center gap-5 w-full" id="menu-content">
+                  <nav class="w-full flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-[16px]">
+                    <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 max-w-[200px] w-full md:w-fit px-6 font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 hover:transition-all hover:duration-300" style="height: 48px;">
+                      <a href="Inicio.html">Inicio</a>
+                    </button>
+                    <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 max-w-[200px] w-full md:w-fit px-6 font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 hover:transition-all hover:duration-300" style="height: 48px;">
+                      <a href="productos.html">Productos</a>
+                    </button>
+                    <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 max-w-[200px] w-full md:w-fit px-6 font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 hover:transition-all hover:duration-300" style="height: 48px;">
+                      <a href="Sobrenosotros.html">Sobre Nosotros</a>
+                    </button>
+                  </nav>
+                  <div class="w-full flex flex-col md:flex-row items-center justify-end gap-3 pb-4 md:pb-0">
+                    <a href="Sobrenosotros.html#unase-a-nosotros" class="max-w-[200px] w-full md:w-fit px-6 text-[16px] whitespace-nowrap font-normal text-black hover:text-gray-700 flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 hover:transition-all hover:duration-300" style="height: 48px;">
+                      <div class="overflow-hidden text-ellipsis">Únase a nosotros</div>
+                      <div class="text-sm hover:text-gray-700 group-hover:translate-x-1 transition-all">
+                        <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+                      </div>
+                    </a>
+                    <a href="Sobrenosotros.html#contactanos" class="max-w-[200px] w-full md:w-fit px-6 text-[16px] whitespace-nowrap font-normal flex gap-2 items-center justify-center rounded-full bg-orange-500 hover:bg-orange-600 hover:transition-all hover:duration-300 text-white" style="height: 48px;">
+                      <div class="overflow-hidden text-ellipsis">Contáctenos</div>
+                      <div class="text-sm group-hover:translate-x-1 transition-all">
+                        <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+        
+          <script>
+            // JavaScript para toggle del menú en móvil
+            document.getElementById('menu-content').style.display = 'flex'; {
+const menuContent = document.getElementById('menu-content');
+menuContent.classList.toggle('active');
+};
+            
+            
+          </script>
+       
+        
+          <!-- Contenido específico de la página -->
+          <main>
+            <div style="height: 2000px; padding: 20px;">
+              <p>Contenido de ejemplo para la página principal. Desplázate para ver el menú fijo.</p>
+            </div>
+          </main>
+        
+          <!-- JavaScript para controlar el scroll y el menú hamburguesa -->
+          <script>
+            let lastScrollTop = 0;
+const header = document.querySelector('header');
+window.addEventListener('scroll', function() {
+let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+if (scrollTop > lastScrollTop) {
+  header.classList.add('menu-hidden');
+} else {
+  header.classList.remove('menu-hidden');
+}
+lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+});
+            document.getElementById('menu-toggle').addEventListener('click', function() {
+const menuContent = document.getElementById('menu-content');
+menuContent.classList.toggle('active');
+});
+          </script>
+        

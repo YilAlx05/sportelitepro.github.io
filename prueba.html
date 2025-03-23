@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sport Elite Línea Deportiva</title>
+  <!-- Importar DIN Next Pro (asumiendo que tienes los archivos localmente) -->
+  <style>
+    @font-face {
+      font-family: 'DIN Next Pro';
+      src: url('path/to/din-next-pro-regular.woff2') format('woff2'),
+           url('path/to/din-next-pro-regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DIN Next Pro';
+      src: url('path/to/din-next-pro-bold.woff2') format('woff2'),
+           url('path/to/din-next-pro-bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+    }
+    body {
+      font-family: 'DIN Next Pro', sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+    h2, h3 {
+      text-transform: uppercase;
+    }
+    .menu-fixed {
+      position: fixed;
+      top: 16px;
+      left: 0;
+      right: 0;
+      transform: translateY(0);
+      transition: transform 0.3s ease-in-out;
+      z-index: 50;
+    }
+    .menu-hidden {
+      transform: translateY(calc(-100% - 16px));
+    }
+  </style>
+  <!-- Importar Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white dark:bg-gray-900">
+  <!-- Barra de Menú -->
+  <header class="menu-fixed bg-gray-100/90 dark:bg-gray-800/90 shadow-md mx-4 rounded-2xl">
+    <div class="w-full mx-auto max-w-7xl h-full flex items-center justify-between px-4" style="padding-top: 12px; padding-bottom: 12px;">
+      <div class="flex items-center">
+        <img class="_image_bh1ht_4 !w-auto object-cover" alt="Logo de Sport Elite Línea Deportiva" src="img/image.png" style="height: 50px; background-color: transparent;">
+      </div>
+      <!-- Botón hamburguesa visible solo en móviles -->
+      <button class="md:hidden text-black" id="menu-toggle">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+      <!-- Contenido del menú, oculto en móviles por defecto -->
+      <div class="hidden md:flex flex-col md:flex-row items-center justify-center gap-5 w-full" id="menu-content">
+        <nav class="w-full flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-[16px]">
+          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full md:w-fit px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+            <a class="_editable_jwu41_1 undefined" href="Inicio.html">Inicio</a>
+          </button>
+          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full md:w-fit px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+            <a class="_editable_jwu41_1 undefined" href="productos.html">Productos</a>
+          </button>
+          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full md:w-fit px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+            <a class="_editable_jwu41_1 undefined" href="Sobrenosotros.html">Sobre Nosotros</a>
+          </button>
+        </nav>
+        <div class="w-full flex flex-col md:flex-row items-center justify-end gap-3 pb-4 md:pb-0">
+          <a href="Sobrenosotros.html#unase-a-nosotros" class="BTN-SECONDARY max-w-[200px] w-full md:w-fit px-6 group text-[16px] whitespace-nowrap font-normal text-black hover:text-gray-700 dark:text-black dark:hover:text-gray-700 flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+            <div class="_editable_jwu41_1 overflow-hidden text-ellipsis">Únase a nosotros</div>
+            <div class="_icon-wrapper_1a3wa_1 text-sm text-black hover:text-gray-700 dark:text-black dark:hover:text-gray-700 group-hover:translate-x-1 transition-all">
+              <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+            </div>
+          </a>
+          <a href="Sobrenosotros.html#contactanos" class="BTN-PRIMARY max-w-[200px] w-full md:w-fit px-6 group text-[16px] whitespace-nowrap font-normal flex gap-2 items-center justify-center rounded-full bg-orange-500 hover:bg-orange-600 hover:transition-all hover:duration-300 text-white" style="height: 48px;">
+            <div class="overflow-hidden text-ellipsis">Contáctenos</div>
+            <div class="text-sm group-hover:translate-x-1 transition-all">
+              <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sección de Portafolio -->
+  <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden" style="margin-top: 100px;">
+    <div class="absolute top-0 left-0 w-24 h-24">
+    </div>
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <!-- Título y Descripción -->
+      <div class="mx-auto max-w-2xl text-center mb-12">
+        <h2 class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange-400 sm:text-5xl">
+          Catálogo de Productos
+        </h2>
+        <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
+          Donde la pasión por el deporte vive. Descubre nuestra línea deportiva premium.
+        </p>
+      </div>
+      <!-- Grid de Productos -->
+      <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <!-- Producto 1: Zapatillas Elite Speed -->
+        <div class="bg-white dark:bg-pink-900 rounded-2xl shadow-lg overflow-hidden">
+          <img class="w-full h-48 object-cover" 
+               src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/c14a3125-b2c8-4b68-89ba-b47ed701274d.jpeg?format=webp" 
+               alt="Zapatillas Elite Speed de Sport Elite Línea Deportiva">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-orange-400">Zapatillas Elite Speed</h3>
+            <p class="mt-2 text-base text-gray-600 dark:text-white/80">
+              Ligeras y con amortiguación para un rendimiento superior.
+            </p>
+          </div>
+        </div>
+        <!-- Producto 2: Camiseta ProDry -->
+        <div class="bg-white dark:bg-pink-900 rounded-2xl shadow-lg overflow-hidden">
+          <img class="w-full h-48 object-cover" 
+               src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" 
+               alt="Camiseta ProDry de Sport Elite Línea Deportiva">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-orange-400">Camiseta ProDry</h3>
+            <p class="mt-2 text-base text-gray-600 dark:text-white/80">
+              Tecnología transpirable para mantenerte fresco y seco.
+            </p>
+          </div>
+        </div>
+        <!-- Producto 3: Mochila Titan -->
+        <div class="bg-white dark:bg-pink-900 rounded-2xl shadow-lg overflow-hidden">
+          <img class="w-full h-48 object-cover" 
+               src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" 
+               alt="Mochila Titan de Sport Elite Línea Deportiva">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-orange-400">Mochila Titan</h3>
+            <p class="mt-2 text-base text-gray-600 dark:text-white/80">
+              Resistente y espaciosa para todo tu equipo deportivo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Uniformes -->
+  <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <!-- Título y Descripción -->
+      <div class="mx-auto max-w-2xl text-center mb-12">
+        <h2 class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange-400 sm:text-5xl">
+          Uniformes de Fútbol
+        </h2>
+        <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
+          Diseñados para el rendimiento en la cancha, nuestros uniformes de fútbol combinan estilo, comodidad y tecnología avanzada. Descubre nuestras tres categorías exclusivas.
+        </p>
+      </div>
+      <!-- Grid de Categorías -->
+      <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <!-- Categoría 1: Uniforme Pro -->
+        <div class="bg-white dark:bg-pink-900 rounded-2xl shadow-lg overflow-hidden">
+          <img class="w-full h-48 object-cover" 
+               src="https://via.placeholder.com/300x200?text=Uniforme+Pro" 
+               alt="Uniforme Pro de Sport Elite Línea Deportiva">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-orange-400">Uniforme Pro</h3>
+            <p class="mt-2 text-base text-gray-600 dark:text-white/80">
+              Ideal para equipos profesionales, con tejidos transpirables y ajuste ergonómico.
+            </p>
+          </div>
+        </div>
+        <!-- Categoría 2: Uniforme Elite -->
+        <div class="bg-white dark:bg-pink-900 rounded-2xl shadow-lg overflow-hidden">
+          <img class="w-full h-48 object-cover" 
+               src="https://via.placeholder.com/300x200?text=Uniforme+Elite" 
+               alt="Uniforme Elite de Sport Elite Línea Deportiva">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-orange-400">Uniforme Elite</h3>
+            <p class="mt-2 text-base text-gray-600 dark:text-white/80">
+              Perfecto para competencias de alto nivel, con diseño moderno y durabilidad superior.
+            </p>
+          </div>
+        </div>
+        <!-- Categoría 3: Uniforme Clásico -->
+        <div class="bg-white dark:bg-pink-900 rounded-2xl shadow-lg overflow-hidden">
+          <img class="w-full h-48 object-cover" 
+               src="https://via.placeholder.com/300x200?text=Uniforme+Clásico" 
+               alt="Uniforme Clásico de Sport Elite Línea Deportiva">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-orange-600 dark:text-orange-400">Uniforme Clásico</h3>
+            <p class="mt-2 text-base text-gray-600 dark:text-white/80">
+              Estilo tradicional para equipos aficionados, cómodo y resistente al desgaste.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido de prueba para simular scroll -->
+  <div style="height: 2000px; padding: 20px;">
+    <p>Desplázate hacia abajo y luego hacia arriba para ver el efecto de la barra de menú.</p>
+  </div>
+
+  <!-- JavaScript para controlar el scroll y el menú hamburguesa -->
+  <script>
+    // Control del scroll
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', function() {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        // Bajar: ocultar la barra
+        header.classList.add('menu-hidden');
+      } else {
+        // Subir: mostrar la barra
+        header.classList.remove('menu-hidden');
+      }
+      
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Evitar valores negativos
+    });
+
+    // Control del menú hamburguesa
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('menu-content').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

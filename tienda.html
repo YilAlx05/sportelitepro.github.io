@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sport Elite Línea Deportiva</title>
+  <style>
+    @font-face {
+      font-family: 'DIN Next Pro';
+      src: url('path/to/din-next-pro-regular.woff2') format('woff2'),
+           url('path/to/din-next-pro-regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'DIN Next Pro';
+      src: url('path/to/din-next-pro-bold.woff2') format('woff2'),
+           url('path/to/din-next-pro-bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+    }
+    body {
+      font-family: 'DIN Next Pro', sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+    h2, h3 {
+      text-transform: uppercase;
+    }
+    .menu-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(0);
+      transition: transform 0.3s ease-in-out;
+      z-index: 50;
+      width: 100%;
+    }
+    .menu-hidden {
+      transform: translateY(-100%);
+    }
+    #menu-content.active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: rgba(243, 244, 246, 0.9);
+      padding: 12px;
+      border-radius: 0 0 1rem 1rem;
+      width: 100%;
+      box-sizing: border-box;
+      align-items: center;
+    }
+    .contenedor {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .producto {
+      width: 200px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .producto:hover {
+      transform: scale(1.05);
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+    }
+    .producto img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+    .precio {
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    /* Banner Styles */
+    .banner {
+      position: relative;
+      width: 100%;
+      max-width: 1600px;
+      margin: 100px auto 40px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+    .slide {
+      min-width: 100%;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .slide-content {
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      max-width: 50%;
+    }
+    .slide-content h3 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .slide-content p {
+      margin: 5px 0 0;
+      font-size: 1rem;
+    }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none; /* Transparent background */
+      color: white;
+      border: none;
+      padding: 10px; /* Reduced padding for minimal space */
+      cursor: pointer;
+      font-size: 2rem; /* Larger arrows for visibility */
+      z-index: 10;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Shadow for contrast */
+    }
+    .arrow-left {
+      left: 15px; /* Slightly more spacing from edge */
+    }
+    .arrow-right {
+      right: 15px;
+    }
+    .arrow:hover {
+      color: #ff9500; /* Orange hover effect for visibility */
+      background: none; /* Keep transparent on hover */
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white dark:bg-gray-900">
+  <!-- Barra de Menú -->
+  <header class="menu-fixed bg-gray-100/90 dark:bg-gray-800/90 shadow-md rounded-b-2xl">
+    <div class="w-full h-full flex items-center justify-between px-4" style="padding-top: 12px; padding-bottom: 12px;">
+      <div class="flex items-center">
+        <img class="_image_bh1ht_4 !w-auto object-cover" alt="Logo de Sport Elite Línea Deportiva" src="img/image.png" style="height: 50px; background-color: transparent;">
+      </div>
+      <div class="flex items-center gap-4">
+        <form class="relative flex items-center" id="search-form">
+          <input type="text" placeholder="Buscar productos..." class="w-48 sm:w-64 px-4 py-2 text-sm text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500" id="search-input">
+          <button type="submit" class="absolute right-2 p-1 text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+        </form>
+        <button class="text-black dark:text-white hover:text-orange-500 dark:hover:text-orange-400" id="cart-button">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+        </button>
+        <button class="text-black" id="menu-toggle">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="hidden flex-col items-center justify-center gap-5 w-full" id="menu-content">
+        <nav class="w-full flex flex-col items-center justify-center gap-4 text-[16px]">
+          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+            <a href="Inicio.html">Inicio</a>
+          </button>
+          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+            <a href="productos.html">Productos</a>
+          </button>
+          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+            <a href="Sobrenosotros.html">Sobre Nosotros</a>
+          </button>
+        </nav>
+        <div class="w-full flex flex-col items-center justify-end gap-3 pb-4">
+          <a href="Sobrenosotros.html#unase-a-nosotros" class="BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] whitespace-nowrap font-normal text-black hover:text-gray-700 dark:text-black dark:hover:text-gray-700 flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+            <div class="_editable_jwu41_1 overflow-hidden text-ellipsis">Únase a nosotros</div>
+            <div class="_icon-wrapper_1a3wa_1 text-sm text-black hover:text-gray-700 dark:text-black dark:hover:text-gray-700 group-hover:translate-x-1 transition-all">
+              <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+            </div>
+          </a>
+          <a href="Sobrenosotros.html#contactanos" class="BTN-PRIMARY max-w-[200px] w-full px-6 group text-[16px] whitespace-nowrap font-normal flex gap-2 items-center justify-center rounded-full bg-orange-500 hover:bg-orange-600 hover:transition-all hover:duration-300 text-white" style="height: 48px;">
+            <div class="overflow-hidden text-ellipsis">Contáctenos</div>
+            <div class="text-sm group-hover:translate-x-1 transition-all">
+              <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner Section -->
+  <section class="banner">
+    <div class="slides" id="slides">
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1552410260-0fd980463811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+        <div class="slide-content">
+          <h3>Entrena como Profesional</h3>
+          <p>Zapatillas Elite Speed - Máximo rendimiento en cada paso.</p>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518614368195-208a1a63e0f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+        <div class="slide-content">
+          <h3>Domina la Cancha</h3>
+          <p>Uniformes Pro - Diseñados para la victoria.</p>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1593079831268-3381b0db4a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+        <div class="slide-content">
+          <h3>Energía sin Límites</h3>
+          <p>Mochila Titan - Lleva tu pasión a todas partes.</p>
+        </div>
+      </div>
+    </div>
+    <button class="arrow arrow-left" id="prev">❮</button>
+    <button class="arrow arrow-right" id="next">❯</button>
+  </section>
+
+  <!-- Sección de Portafolio -->
+  <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center mb-12">
+        <h2 class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange-400 sm:text-5xl">
+          Catálogo de Productos
+        </h2>
+        <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
+          Donde la pasión por el deporte vive. Descubre nuestra línea deportiva premium.
+        </p>
+      </div>
+      <div class="contenedor" id="product-list">
+        <a href="zapatillas-elite-speed.html" class="producto" data-nombre="zapatillas elite speed">
+          <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/c14a3125-b2c8-4b68-89ba-b47ed701274d.jpeg?format=webp" alt="Zapatillas Elite Speed">
+          <p>Zapatillas Elite Speed</p>
+          <p class="precio">$50.00</p>
+        </a>
+        <a href="camiseta-prodry.html" class="producto" data-nombre="camiseta prodry">
+          <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" alt="Camiseta ProDry">
+          <p>Camiseta ProDry</p>
+          <p class="precio">$15.00</p>
+        </a>
+        <a href="mochila-titan.html" class="producto" data-nombre="mochila titan">
+          <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Mochila Titan">
+          <p>Mochila Titan</p>
+          <p class="precio">$40.00</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Uniformes -->
+  <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center mb-12">
+        <h2 class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange-400 sm:text-5xl">
+          Uniformes de Fútbol
+        </h2>
+        <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
+          Diseñados para el rendimiento en la cancha, nuestros uniformes de fútbol combinan estilo, comodidad y tecnología avanzada.
+        </p>
+      </div>
+      <div class="contenedor" id="uniform-list">
+        <a href="uniforme-pro.html" class="producto" data-nombre="uniforme pro">
+          <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
+          <p>Uniforme Pro</p>
+          <p class="precio">$60.00</p>
+        </a>
+        <a href="uniforme-elite.html" class="producto" data-nombre="uniforme elite">
+          <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
+          <p>Uniforme Elite</p>
+          <p class="precio">$70.00</p>
+        </a>
+        <a href="uniforme-clasico.html" class="producto" data-nombre="uniforme clásico">
+          <img src="https://via.placeholder.com/150" alt="Uniforme Clásico">
+          <p>Uniforme Clásico</p>
+          <p class="precio">$45.00</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <script>
+    // Control del scroll
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', function() {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        header.classList.add('menu-hidden');
+      } else {
+        header.classList.remove('menu-hidden');
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+
+    // Control del menú hamburguesa
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('menu-content').classList.toggle('active');
+    });
+
+    // Filtro en tiempo real con keyup
+    document.getElementById('search-input').addEventListener('keyup', function() {
+      let filtro = this.value.toLowerCase();
+      let productos = document.querySelectorAll('.producto');
+      productos.forEach(producto => {
+        let nombre = producto.getAttribute('data-nombre').toLowerCase();
+        producto.style.display = nombre.includes(filtro) ? '' : 'none';
+      });
+    });
+
+    // Control básico de búsqueda con submit
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      let filtro = document.getElementById('search-input').value.toLowerCase();
+      let productos = document.querySelectorAll('.producto');
+      productos.forEach(producto => {
+        let nombre = producto.getAttribute('data-nombre').toLowerCase();
+        producto.style.display = nombre.includes(filtro) ? '' : 'none';
+      });
+    });
+
+    // Botón de carrito
+    document.getElementById('cart-button').addEventListener('click', function() {
+      alert('Funcionalidad de carrito en desarrollo. ¡Pronto estará lista!');
+    });
+
+    // Banner JavaScript
+    const slides = document.getElementById('slides');
+    const slideElements = document.querySelectorAll('.slide');
+    const totalSlides = slideElements.length;
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      if (index >= totalSlides) currentSlide = 0;
+      else if (index < 0) currentSlide = totalSlides - 1;
+      else currentSlide = index;
+      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    document.getElementById('next').addEventListener('click', function() {
+      showSlide(currentSlide + 1);
+    });
+
+    document.getElementById('prev').addEventListener('click', function() {
+      showSlide(currentSlide - 1);
+    });
+
+    let autoSlide = setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 5000);
+
+    document.querySelector('.banner').addEventListener('mouseenter', () => {
+      clearInterval(autoSlide);
+    });
+    document.querySelector('.banner').addEventListener('mouseleave', () => {
+      autoSlide = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
