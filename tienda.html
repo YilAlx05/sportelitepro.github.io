@@ -23,6 +23,7 @@
       font-family: 'DIN Next Pro', sans-serif;
       font-size: 1.25rem;
       line-height: 1.6;
+      margin: 0;
     }
     h2, h3 {
       text-transform: uppercase;
@@ -173,19 +174,9 @@
       font-size: 1rem;
     }
     .slides a.slide {
-  min-width: 100%;
-  height: 400px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 20px;
-  box-sizing: border-box;
-  text-decoration: none; /* Remove underline from links */
-  color: inherit; /* Inherit text color */
-}
+      text-decoration: none;
+      color: inherit;
+    }
     .arrow {
       position: absolute;
       top: 50%;
@@ -207,7 +198,6 @@
     }
     .arrow:hover {
       color: #ff9500;
-      background: none;
     }
     /* Carrusel */
     .carousel {
@@ -432,6 +422,41 @@
       justify-content: center;
       gap: 20px;
     }
+    /* Estilos para la notificación personalizada */
+    #custom-notification {
+      max-width: 300px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1000;
+    }
+    #custom-notification.show {
+      opacity: 1;
+    }
+    /* Estilos para el contador del carrito */
+    #cart-count {
+      display: none;
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #ff9500;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      text-align: center;
+      line-height: 20px;
+    }
+    #cart-count.active {
+      display: block;
+    }
     /* Media Queries para pantallas pequeñas */
     @media (max-width: 640px) {
       .flex.items-center.gap-4 {
@@ -543,10 +568,11 @@
           </div>
         </div>
 
-        <button class="text-black dark:text-white hover:text-orange-500 dark:hover:text-orange-400" id="cart-button">
+        <button class="text-black dark:text-white hover:text-orange-500 dark:hover:text-orange-400 relative" id="cart-button">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
           </svg>
+          <span id="cart-count" class="active">0</span>
         </button>
         <button class="text-black" id="menu-toggle">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -557,7 +583,7 @@
       <div class="hidden flex-col items-center justify-center gap-5 w-full" id="menu-content">
         <nav class="w-full flex flex-col items-center justify-center gap-4 text-[16px]">
           <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
-            <a href="Inicio.html">Inicio</a>
+            <a href="index.html">Inicio</a>
           </button>
           <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
             <a href="productos.html">Productos</a>
@@ -728,66 +754,6 @@
                 </svg>
               </button>
             </div>
-            <div class="producto" data-nombre="uniforme clásico">
-              <a href="uniforme-clasico.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Clásico">
-                <div class="contenido">
-                  <p>Uniforme Clásico</p>
-                  <p class="precio">$45.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Clásico" data-price="45.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme rapido">
-              <a href="uniforme-rapido.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Rápido">
-                <div class="contenido">
-                  <p>Uniforme Rápido</p>
-                  <p class="precio">$55.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Rápido" data-price="55.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme tecno">
-              <a href="uniforme-tecno.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Tecno">
-                <div class="contenido">
-                  <p>Uniforme Tecno</p>
-                  <p class="precio">$65.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Tecno" data-price="65.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme ligero">
-              <a href="uniforme-ligero.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Ligero">
-                <div class="contenido">
-                  <p>Uniforme Ligero</p>
-                  <p class="precio">$50.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Ligero" data-price="50.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
           </div>
         </div>
         <button class="carousel-arrow carousel-arrow-left" id="uniformes-prev">❮</button>
@@ -861,6 +827,14 @@
       </div>
     </div>
   </section>
+
+  <!-- Notificación personalizada -->
+  <div id="custom-notification" class="fixed bottom-10 right-10 bg-green-600 text-white p-4 rounded-lg shadow-lg flex items-center gap-2 opacity-0 transition-opacity duration-500 z-50">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    </svg>
+    <span id="notification-message"></span>
+  </div>
 
   <script>
     // Control del scroll
@@ -949,7 +923,7 @@
             const price = parseFloat(this.getAttribute('data-price'));
             cart.push({ name, price });
             saveCart();
-            alert(`${name} agregado al carrito!`);
+            showNotification(`${name} agregado al carrito!`);
           });
           searchResultsContainer.appendChild(clon);
         });
@@ -963,10 +937,33 @@
     const cartTotal = document.getElementById('cart-total');
     const confirmModal = document.getElementById('confirm-modal');
     const confirmDetails = document.getElementById('confirm-details');
+    const cartCount = document.getElementById('cart-count');
+    const notification = document.getElementById('custom-notification');
+    const notificationMessage = document.getElementById('notification-message');
 
     function saveCart() {
       localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
     }
+
+    function showNotification(message) {
+      notificationMessage.textContent = message;
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+
+    function updateCartCount() {
+      cartCount.textContent = cart.length;
+      if (cart.length > 0) {
+        cartCount.classList.add('active');
+      } else {
+        cartCount.classList.remove('active');
+      }
+    }
+
+    updateCartCount();
 
     document.querySelectorAll('.boton-agregar').forEach(button => {
       button.addEventListener('click', function(event) {
@@ -976,7 +973,7 @@
         const price = parseFloat(this.getAttribute('data-price'));
         cart.push({ name, price });
         saveCart();
-        alert(`${name} agregado al carrito!`);
+        showNotification(`${name} agregado al carrito!`);
       });
     });
 
@@ -1046,13 +1043,11 @@
       document.getElementById('send-email').onclick = function() {
         window.location.href = mailtoLink;
         confirmModal.style.display = 'none';
-        // Opcional: cart = []; saveCart(); updateCartModal();
       };
 
       document.getElementById('send-whatsapp').onclick = function() {
         window.open(whatsappLink, '_blank');
         confirmModal.style.display = 'none';
-        // Opcional: cart = []; saveCart(); updateCartModal();
       };
 
       document.getElementById('cancel-confirm').onclick = function() {
@@ -1105,8 +1100,8 @@
       const carousel = document.getElementById(carouselId);
       const slides = document.getElementById(slidesId);
       const productos = document.querySelectorAll(`#${slidesId} .producto`);
-      const stepDesktop = 310;
-      const stepMobile = 210;
+      const stepDesktop = 310; // Ancho del producto + gap en escritorio
+      const stepMobile = 210; // Ancho del producto + gap en móvil
       let currentPosition = 0;
       let startX = 0;
       let isDragging = false;
@@ -1144,37 +1139,33 @@
         const maxPosition = -(updateTotalWidth() - carouselWidth);
         const isMobile = window.innerWidth <= 640;
 
-        if (isMobile) {
-          const productWidth = step;
-          const centerOffset = (carouselWidth - productWidth) / 2;
-          currentPosition += direction * step;
+        currentPosition += direction * step;
 
-          if (currentPosition <= maxPosition) {
+        if (currentPosition <= maxPosition) {
+          // Reiniciar al inicio
+          slides.style.transition = 'transform 0.3s ease-in-out';
+          slides.style.transform = `translateX(${maxPosition}px)`; // Mover al final visible
+          setTimeout(() => {
+            slides.style.transition = 'none';
+            currentPosition = isMobile ? (carouselWidth - step) / 2 : 0; // Centrado en móvil, inicio en escritorio
+            slides.style.transform = `translateX(${currentPosition}px)`;
             setTimeout(() => {
-              slides.style.transition = 'none';
-              currentPosition = centerOffset;
-              slides.style.transform = `translateX(${currentPosition}px)`;
-              setTimeout(() => {
-                slides.style.transition = 'transform 0.3s ease-in-out';
-              }, 50);
-            }, 300);
-            return;
-          }
-          snapToNearest();
+              slides.style.transition = 'transform 0.3s ease-in-out';
+            }, 50);
+          }, 300);
+        } else if (currentPosition > 0) {
+          // Reiniciar al final
+          slides.style.transition = 'transform 0.3s ease-in-out';
+          slides.style.transform = `translateX(0px)`; // Mover al inicio visible
+          setTimeout(() => {
+            slides.style.transition = 'none';
+            currentPosition = maxPosition;
+            slides.style.transform = `translateX(${currentPosition}px)`;
+            setTimeout(() => {
+              slides.style.transition = 'transform 0.3s ease-in-out';
+            }, 50);
+          }, 300);
         } else {
-          currentPosition += direction * step;
-
-          if (currentPosition <= maxPosition) {
-            setTimeout(() => {
-              slides.style.transition = 'none';
-              currentPosition = 0;
-              slides.style.transform = `translateX(${currentPosition}px)`;
-              setTimeout(() => {
-                slides.style.transition = 'transform 0.3s ease-in-out';
-              }, 50);
-            }, 300);
-            return;
-          }
           snapToNearest();
         }
       }
@@ -1187,6 +1178,7 @@
         moveCarousel(1);
       });
 
+      // Soporte para deslizar en móviles
       carousel.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
         isDragging = true;
@@ -1231,6 +1223,7 @@
         snapToNearest();
       });
 
+      // Posición inicial
       snapToNearest();
     }
 
