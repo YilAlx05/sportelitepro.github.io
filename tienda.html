@@ -58,34 +58,78 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 10px;
+      padding: 0 5px;
     }
     .producto {
-      width: 200px;
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-      border-radius: 10px;
+      width: 300px;
       box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
       text-decoration: none;
       color: inherit;
-      display: block;
+      display: flex;
+      flex-direction: column;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      background-color: #fff;
+      scroll-snap-align: center;
     }
     .producto:hover {
       transform: scale(1.05);
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 4px 4px 15px rgba(0,0,0,0.4);
+      z-index: 20;
     }
     .producto img {
       width: 100%;
-      height: auto;
-      border-radius: 5px;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      margin: 0;
+    }
+    .producto .contenido {
+      padding: 10px;
+      text-align: center;
+      font-size: 0.8rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100px;
+    }
+    .producto .contenido .precio {
+      font-weight: bold;
+      color: #28a745;
+      font-size: 0.9rem;
+    }
+    .producto .boton-agregar {
+      background-color: #000;
+      color: #fff;
+      padding: 8px;
+      text-align: center;
+      font-size: 0.8rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .producto .boton-agregar:hover {
+      background-color: #333;
+    }
+    .producto .boton-agregar svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
     }
     .precio {
       font-weight: bold;
       color: #28a745;
     }
-
     /* Banner Styles */
     .banner {
       position: relative;
@@ -132,34 +176,216 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: none; /* Transparent background */
+      background: none;
       color: white;
       border: none;
-      padding: 10px; /* Reduced padding for minimal space */
+      padding: 10px;
       cursor: pointer;
-      font-size: 2rem; /* Larger arrows for visibility */
+      font-size: 2rem;
       z-index: 10;
-      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Shadow for contrast */
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     }
     .arrow-left {
-      left: 15px; /* Slightly more spacing from edge */
+      left: 15px;
     }
     .arrow-right {
       right: 15px;
     }
     .arrow:hover {
-      color: #ff9500; /* Orange hover effect for visibility */
-      background: none; /* Keep transparent on hover */
+      color: #ff9500;
+      background: none;
+    }
+    /* Carrusel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      overflow-x: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 15px 0;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+      width: max-content;
+      gap: 10px;
+    }
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1600px;
+      margin: 40px auto;
+    }
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      color: #000;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 2rem;
+      z-index: 10;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    .carousel-arrow-left {
+      left: 15px;
+    }
+    .carousel-arrow-right {
+      right: 15px;
+    }
+    .carousel-arrow:hover {
+      color: #ff9500;
+    }
+    /* Estilos para el menú de categorías */
+    .categories-container {
+      position: relative;
+      display: inline-block;
+    }
+    .categories-btn {
+      background-color: transparent;
+      color: #000;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .categories-btn:hover {
+      color: #ff9500;
+    }
+    .categories-dropdown {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 100;
+      border-radius: 8px;
+      top: 100%;
+      left: 0;
+    }
+    .categories-container:hover .categories-dropdown {
+      display: block;
+    }
+    .category-item {
+      padding: 10px 15px;
+      color: #333;
+      text-decoration: none;
+      display: block;
+    }
+    .category-item:hover {
+      background-color: #f5f5f5;
+      color: #ff9500;
+    }
+    /* Estilo para el nombre de la marca */
+    .brand-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-left: 8px;
+    }
+    .brand-name span {
+      color: #ff9500;
+    }
+    /* Media Queries para pantallas pequeñas */
+    @media (max-width: 640px) {
+      .flex.items-center.gap-4 {
+        gap: 4px;
+      }
+      #search-form {
+        width: 32px;
+        position: relative;
+        transition: width 0.3s ease;
+      }
+      #search-form.active {
+        width: 150px;
+      }
+      #search-input {
+        width: 0;
+        padding: 0;
+        border: none;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+      #search-form.active #search-input {
+        width: 100%;
+        padding: 6px 24px 6px 8px;
+        opacity: 1;
+        border: 1px solid #ddd;
+      }
+      #search-form button {
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 4px;
+      }
+      #search-form:not(.active) #search-input {
+        display: none;
+      }
+      .categories-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      .categories-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      #cart-button svg {
+        width: 24px;
+        height: 24px;
+      }
+      #menu-toggle svg {
+        width: 24px;
+        height: 24px;
+      }
+      .categories-dropdown {
+        min-width: 150px;
+      }
+      .brand-name {
+        font-size: 1rem;
+        margin-left: 4px;
+      }
+      .producto {
+        width: 200px;
+      }
+      .producto img {
+        height: 140px;
+      }
+      .producto .contenido {
+        height: 60px;
+      }
+      .carousel {
+        padding: 10px 0;
+      }
+      .carousel-slides {
+        justify-content: center;
+      }
     }
   </style>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white dark:bg-gray-900">
-  <!-- Barra de Menú -->
+  
   <header class="menu-fixed bg-gray-100/90 dark:bg-gray-800/90 shadow-md rounded-b-2xl">
     <div class="w-full h-full flex items-center justify-between px-4" style="padding-top: 12px; padding-bottom: 12px;">
       <div class="flex items-center">
         <img class="_image_bh1ht_4 !w-auto object-cover" alt="Logo de Sport Elite Línea Deportiva" src="img/image.png" style="height: 50px; background-color: transparent;">
+        <div class="brand-name">Sport Elite Pro <span>.</span></div>
       </div>
       <div class="flex items-center gap-4">
         <form class="relative flex items-center" id="search-form">
@@ -170,6 +396,22 @@
             </svg>
           </button>
         </form>
+
+        <div class="categories-container">
+          <button class="categories-btn">
+            <span>Categorías</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="categories-dropdown">
+            <a href="#zapatillas" class="category-item">Zapatillas</a>
+            <a href="#uniformes" class="category-item">Uniformes</a>
+            <a href="#accesorios" class="category-item">Accesorios</a>
+            <a href="#equipamiento" class="category-item">Equipamiento</a>
+          </div>
+        </div>
+
         <button class="text-black dark:text-white hover:text-orange-500 dark:hover:text-orange-400" id="cart-button">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -211,16 +453,15 @@
     </div>
   </header>
 
-  <!-- Banner Section -->
   <section class="banner">
     <div class="slides" id="slides">
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1552410260-0fd980463811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+      <div class="slide" style="background-image: url('img/f7.jpg');">
         <div class="slide-content">
           <h3>Entrena como Profesional</h3>
           <p>Zapatillas Elite Speed - Máximo rendimiento en cada paso.</p>
         </div>
       </div>
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518614368195-208a1a63e0f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+      <div class="slide" style="background-image: url('img/f8.jpg');">
         <div class="slide-content">
           <h3>Domina la Cancha</h3>
           <p>Uniformes Pro - Diseñados para la victoria.</p>
@@ -237,69 +478,370 @@
     <button class="arrow arrow-right" id="next">❯</button>
   </section>
 
-  <!-- Sección de Portafolio -->
   <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-1 lg:px-2">
       <div class="mx-auto max-w-2xl text-center mb-12">
-        <h2 class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange-400 sm:text-5xl">
-          Catálogo de Productos
+        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
+          Uniformes deportivos
         </h2>
         <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
           Donde la pasión por el deporte vive. Descubre nuestra línea deportiva premium.
         </p>
       </div>
-      <div class="contenedor" id="product-list">
-        <a href="zapatillas-elite-speed.html" class="producto" data-nombre="zapatillas elite speed">
-          <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/c14a3125-b2c8-4b68-89ba-b47ed701274d.jpeg?format=webp" alt="Zapatillas Elite Speed">
-          <p>Zapatillas Elite Speed</p>
-          <p class="precio">$50.00</p>
-        </a>
-        <a href="camiseta-prodry.html" class="producto" data-nombre="camiseta prodry">
-          <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" alt="Camiseta ProDry">
-          <p>Camiseta ProDry</p>
-          <p class="precio">$15.00</p>
-        </a>
-        <a href="mochila-titan.html" class="producto" data-nombre="mochila titan">
-          <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Mochila Titan">
-          <p>Mochila Titan</p>
-          <p class="precio">$40.00</p>
-        </a>
+      <div class="carousel-wrapper">
+        <div class="carousel" id="uniformes-carousel">
+          <div class="carousel-slides" id="uniformes-slides">
+            <a href="zapatillas-elite-speed.html" class="producto" data-nombre="zapatillas elite speed">
+              <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/c14a3125-b2c8-4b68-89ba-b47ed701274d.jpeg?format=webp" alt="Zapatillas Elite Speed">
+              <div class="contenido">
+                <p>Zapatillas Elite Speed</p>
+                <p class="precio">$50.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="camiseta-prodry.html" class="producto" data-nombre="camiseta prodry">
+              <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" alt="Camiseta ProDry">
+              <div class="contenido">
+                <p>Camiseta ProDry</p>
+                <p class="precio">$15.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="mochila-titan.html" class="producto" data-nombre="mochila titan">
+              <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Mochila Titan">
+              <div class="contenido">
+                <p>Mochila Titan</p>
+                <p class="precio">$40.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-pro.html" class="producto" data-nombre="uniforme pro">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
+              <div class="contenido">
+                <p>Uniforme Pro</p>
+                <p class="precio">$60.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-elite.html" class="producto" data-nombre="uniforme elite">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
+              <div class="contenido">
+                <p>Uniforme Elite</p>
+                <p class="precio">$70.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-clasico.html" class="producto" data-nombre="uniforme clásico">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Clásico">
+              <div class="contenido">
+                <p>Uniforme Clásico</p>
+                <p class="precio">$45.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-rapido.html" class="producto" data-nombre="uniforme rapido">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Rápido">
+              <div class="contenido">
+                <p>Uniforme Rápido</p>
+                <p class="precio">$55.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-tecno.html" class="producto" data-nombre="uniforme tecno">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Tecno">
+              <div class="contenido">
+                <p>Uniforme Tecno</p>
+                <p class="precio">$65.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-ligero.html" class="producto" data-nombre="uniforme ligero">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Ligero">
+              <div class="contenido">
+                <p>Uniforme Ligero</p>
+                <p class="precio">$50.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+          </div>
+        </div>
+        <button class="carousel-arrow carousel-arrow-left" id="uniformes-prev">❮</button>
+        <button class="carousel-arrow carousel-arrow-right" id="uniformes-next">❯</button>
       </div>
     </div>
   </section>
 
-  <!-- Sección de Uniformes -->
   <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-1 lg:px-2">
       <div class="mx-auto max-w-2xl text-center mb-12">
-        <h2 class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange-400 sm:text-5xl">
+        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
           Uniformes de Fútbol
         </h2>
         <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
           Diseñados para el rendimiento en la cancha, nuestros uniformes de fútbol combinan estilo, comodidad y tecnología avanzada.
         </p>
       </div>
-      <div class="contenedor" id="uniform-list">
-        <a href="uniforme-pro.html" class="producto" data-nombre="uniforme pro">
-          <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
-          <p>Uniforme Pro</p>
-          <p class="precio">$60.00</p>
-        </a>
-        <a href="uniforme-elite.html" class="producto" data-nombre="uniforme elite">
-          <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
-          <p>Uniforme Elite</p>
-          <p class="precio">$70.00</p>
-        </a>
-        <a href="uniforme-clasico.html" class="producto" data-nombre="uniforme clásico">
-          <img src="https://via.placeholder.com/150" alt="Uniforme Clásico">
-          <p>Uniforme Clásico</p>
-          <p class="precio">$45.00</p>
-        </a>
+      <div class="carousel-wrapper">
+        <div class="carousel" id="futbol-carousel">
+          <div class="carousel-slides" id="futbol-slides">
+            <a href="uniforme-pro.html" class="producto" data-nombre="uniforme pro">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
+              <div class="contenido">
+                <p>Uniforme Pro</p>
+                <p class="precio">$60.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-elite.html" class="producto" data-nombre="uniforme elite">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
+              <div class="contenido">
+                <p>Uniforme Elite</p>
+                <p class="precio">$70.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-clasico.html" class="producto" data-nombre="uniforme clásico">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Clásico">
+              <div class="contenido">
+                <p>Uniforme Clásico</p>
+                <p class="precio">$45.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a><a href="camiseta-prodry.html" class="producto" data-nombre="camiseta prodry">
+              <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" alt="Camiseta ProDry">
+              <div class="contenido">
+                <p>Camiseta ProDry</p>
+                <p class="precio">$15.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="mochila-titan.html" class="producto" data-nombre="mochila titan">
+              <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Mochila Titan">
+              <div class="contenido">
+                <p>Mochila Titan</p>
+                <p class="precio">$40.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-pro.html" class="producto" data-nombre="uniforme pro">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
+              <div class="contenido">
+                <p>Uniforme Pro</p>
+                <p class="precio">$60.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-elite.html" class="producto" data-nombre="uniforme elite">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
+              <div class="contenido">
+                <p>Uniforme Elite</p>
+                <p class="precio">$70.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+          </div>
+        </div>
+        <button class="carousel-arrow carousel-arrow-left" id="futbol-prev">❮</button>
+        <button class="carousel-arrow carousel-arrow-right" id="futbol-next">❯</button>
       </div>
     </div>
   </section>
 
-  
+  <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden">
+    <div class="mx-auto max-w-7xl px-1 lg:px-2">
+      <div class="mx-auto max-w-2xl text-center mb-12">
+        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
+          Uniformes de Fútbol
+        </h2>
+        <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
+          Diseñados para el rendimiento en la cancha, nuestros uniformes de fútbol combinan estilo, comodidad y tecnología avanzada.
+        </p>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel" id="futbol-carousel">
+          <div class="carousel-slides" id="futbol-slides">
+            <a href="uniforme-pro.html" class="producto" data-nombre="uniforme pro">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
+              <div class="contenido">
+                <p>Uniforme Pro</p>
+                <p class="precio">$60.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-elite.html" class="producto" data-nombre="uniforme elite">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
+              <div class="contenido">
+                <p>Uniforme Elite</p>
+                <p class="precio">$70.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-clasico.html" class="producto" data-nombre="uniforme clásico">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Clásico">
+              <div class="contenido">
+                <p>Uniforme Clásico</p>
+                <p class="precio">$45.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a><a href="camiseta-prodry.html" class="producto" data-nombre="camiseta prodry">
+              <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" alt="Camiseta ProDry">
+              <div class="contenido">
+                <p>Camiseta ProDry</p>
+                <p class="precio">$15.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="mochila-titan.html" class="producto" data-nombre="mochila titan">
+              <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Mochila Titan">
+              <div class="contenido">
+                <p>Mochila Titan</p>
+                <p class="precio">$40.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-pro.html" class="producto" data-nombre="uniforme pro">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
+              <div class="contenido">
+                <p>Uniforme Pro</p>
+                <p class="precio">$60.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+            <a href="uniforme-elite.html" class="producto" data-nombre="uniforme elite">
+              <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
+              <div class="contenido">
+                <p>Uniforme Elite</p>
+                <p class="precio">$70.00</p>
+              </div>
+              <button class="boton-agregar">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </a>
+          </div>
+        </div>
+        <button class="carousel-arrow carousel-arrow-left" id="futbol-prev">❮</button>
+        <button class="carousel-arrow carousel-arrow-right" id="futbol-next">❯</button>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+
 
   <script>
     // Control del scroll
@@ -318,6 +860,22 @@
     // Control del menú hamburguesa
     document.getElementById('menu-toggle').addEventListener('click', function() {
       document.getElementById('menu-content').classList.toggle('active');
+    });
+
+    // Expandir buscador al hacer clic en el ícono en móvil
+    document.querySelector('#search-form button').addEventListener('click', function(e) {
+      if (window.innerWidth <= 640 && !document.getElementById('search-form').classList.contains('active')) {
+        e.preventDefault();
+        document.getElementById('search-form').classList.add('active');
+        document.getElementById('search-input').focus();
+      }
+    });
+
+    // Colapsar buscador al perder foco
+    document.getElementById('search-input').addEventListener('blur', function() {
+      if (window.innerWidth <= 640) {
+        document.getElementById('search-form').classList.remove('active');
+      }
     });
 
     // Filtro en tiempo real con keyup
@@ -379,6 +937,145 @@
         showSlide(currentSlide + 1);
       }, 5000);
     });
+
+    // Función para inicializar un carrusel
+    function initializeCarousel(carouselId, slidesId, prevId, nextId) {
+      const carousel = document.getElementById(carouselId);
+      const slides = document.getElementById(slidesId);
+      const productos = document.querySelectorAll(`#${slidesId} .producto`);
+      const stepDesktop = 310; // 300px de ancho + 10px de gap
+      const stepMobile = 210; // 200px de ancho + 10px de gap
+      let currentPosition = 0;
+      let startX = 0;
+      let isDragging = false;
+
+      function updateStep() {
+        return window.innerWidth <= 640 ? stepMobile : stepDesktop;
+      }
+
+      function updateTotalWidth() {
+        return productos.length * updateStep();
+      }
+
+      function snapToNearest() {
+        const step = updateStep();
+        const carouselWidth = carousel.offsetWidth;
+        const maxPosition = -(updateTotalWidth() - carouselWidth);
+        const isMobile = window.innerWidth <= 640;
+
+        if (isMobile) {
+          const nearestIndex = Math.round(-currentPosition / step);
+          const productWidth = step;
+          const centerOffset = (carouselWidth - productWidth) / 2;
+          currentPosition = Math.max(maxPosition, Math.min(0, -(nearestIndex * step) + centerOffset));
+        } else {
+          const nearestIndex = Math.round(-currentPosition / step);
+          currentPosition = Math.max(maxPosition, Math.min(0, -nearestIndex * step));
+        }
+
+        slides.style.transform = `translateX(${currentPosition}px)`;
+      }
+
+      function moveCarousel(direction) {
+        const step = updateStep();
+        const carouselWidth = carousel.offsetWidth;
+        const maxPosition = -(updateTotalWidth() - carouselWidth);
+        const isMobile = window.innerWidth <= 640;
+
+        if (isMobile) {
+          const productWidth = step;
+          const centerOffset = (carouselWidth - productWidth) / 2;
+          currentPosition += direction * step;
+
+          if (currentPosition <= maxPosition) {
+            setTimeout(() => {
+              slides.style.transition = 'none';
+              currentPosition = centerOffset;
+              slides.style.transform = `translateX(${currentPosition}px)`;
+              setTimeout(() => {
+                slides.style.transition = 'transform 0.3s ease-in-out';
+              }, 50);
+            }, 300);
+            return;
+          }
+          snapToNearest();
+        } else {
+          currentPosition += direction * step;
+
+          if (currentPosition <= maxPosition) {
+            setTimeout(() => {
+              slides.style.transition = 'none';
+              currentPosition = 0;
+              slides.style.transform = `translateX(${currentPosition}px)`;
+              setTimeout(() => {
+                slides.style.transition = 'transform 0.3s ease-in-out';
+              }, 50);
+            }, 300);
+            return;
+          }
+          snapToNearest();
+        }
+      }
+
+      document.getElementById(nextId).addEventListener('click', function() {
+        moveCarousel(-1);
+      });
+
+      document.getElementById(prevId).addEventListener('click', function() {
+        moveCarousel(1);
+      });
+
+      carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        clearInterval(autoSlideInterval);
+      });
+
+      carousel.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const diffX = currentX - startX;
+        slides.style.transform = `translateX(${currentPosition + diffX}px)`;
+      });
+
+      carousel.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diffX = endX - startX;
+        currentPosition += diffX;
+        snapToNearest();
+
+        autoSlideInterval = setInterval(() => {
+          moveCarousel(-1);
+        }, 5000);
+      });
+
+      let autoSlideInterval = setInterval(() => {
+        moveCarousel(-1);
+      }, 5000);
+
+      carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
+      });
+
+      carousel.addEventListener('mouseleave', () => {
+        autoSlideInterval = setInterval(() => {
+          moveCarousel(-1);
+        }, 5000);
+      });
+
+      window.addEventListener('resize', () => {
+        snapToNearest();
+      });
+
+      snapToNearest();
+    }
+
+    // Inicializar ambos carruseles
+    initializeCarousel('uniformes-carousel', 'uniformes-slides', 'uniformes-prev', 'uniformes-next');
+    initializeCarousel('futbol-carousel', 'futbol-slides', 'futbol-prev', 'futbol-next');
+    initializeCarousel('futbol-carousel', 'futbol-slides', 'futbol-prev', 'futbol-next');
   </script>
 </body>
 </html>
