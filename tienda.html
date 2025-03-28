@@ -61,6 +61,21 @@
         gap: 10px;
         padding: 0 5px;
     }
+    .boton-agregar {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    z-index: 10;
+    position: relative;
+}
+.producto {
+    pointer-events: auto;
+}
+.carousel {
+    pointer-events: auto;
+}
+.carousel-slides {
+    pointer-events: auto;
+}
     .producto {
         width: 300px;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
@@ -545,21 +560,7 @@
             justify-content: center;
         }
     }
-    .boton-agregar {
-    -webkit-tap-highlight-color: transparent; /* Evita el resaltado en móvil */
-    touch-action: manipulation; /* Mejora la respuesta al toque */
-    z-index: 10; /* Asegura que esté por encima de otros elementos */
-    position: relative; /* Evita superposición */
-}
-.producto {
-    pointer-events: auto; /* Permite eventos en el producto */
-}
-.carousel {
-    pointer-events: auto; /* Permite eventos en el carrusel */
-}
-.product-link {
-    pointer-events: auto; /* Permite clics en el enlace */
-}
+    
 </style>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -1268,8 +1269,14 @@
 
     function showNotification(message) {
         notificationMessage.textContent = message;
+        notification.style.display = 'block'; // Mostrar notificación
         notification.classList.add('show');
-        setTimeout(() => notification.classList.remove('show'), 3000);
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.style.display = 'none'; // Ocultar completamente después de la transición
+            }, 500); // Coincide con la duración de la transición en CSS (0.5s)
+        }, 3000);
     }
 
     function updateCartCount() {
@@ -1278,31 +1285,15 @@
     }
 
     function addToCart(event) {
-        event.preventDefault();
-        event.stopPropagation();
         const button = event.target.closest('.boton-agregar');
         if (!button) return;
+        event.stopPropagation();
         const name = button.getAttribute('data-name');
         const price = parseFloat(button.getAttribute('data-price'));
         cart.push({ name, price });
         saveCart();
         showNotification(`${name} agregado al carrito!`);
     }
-
-    // Delegación de eventos para clics y toques
-    document.body.addEventListener('click', function(event) {
-        if (event.target.closest('.boton-agregar')) {
-            addToCart(event);
-        }
-    });
-
-    document.body.addEventListener('touchend', function(event) {
-        const button = event.target.closest('.boton-agregar');
-        if (button) {
-            addToCart(event);
-            event.preventDefault(); // Evitar que el carrusel interfiera
-        }
-    }, { passive: false });
 
     function updateCartModal() {
         cartItems.innerHTML = '';
@@ -1419,8 +1410,9 @@
         let currentPosition = 0;
         let isDragging = false;
         let startX = 0;
-        let shouldMoveCarousel = false;
+        let movedDistance = 0;
 
+        // Clonar productos para el efecto infinito
         productos.forEach(producto => {
             const clone = producto.cloneNode(true);
             slides.appendChild(clone);
@@ -1464,21 +1456,34 @@
         document.getElementById(nextId).addEventListener('click', () => moveCarousel(-1));
         document.getElementById(prevId).addEventListener('click', () => moveCarousel(1));
 
+        // Delegación de eventos para botones en el carrusel
+        slides.addEventListener('click', function(event) {
+            const button = event.target.closest('.boton-agregar');
+            if (button) {
+                addToCart(event);
+            }
+        });
+
+        slides.addEventListener('touchend', function(event) {
+            const button = event.target.closest('.boton-agregar');
+            if (button && Math.abs(movedDistance) < 20) {
+                addToCart(event);
+            }
+        }, { passive: true });
+
+        // Eventos táctiles para el carrusel
         carousel.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             isDragging = true;
-            shouldMoveCarousel = true;
+            movedDistance = 0;
             slides.style.transition = 'none';
         }, { passive: true });
 
         carousel.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             const currentX = e.touches[0].clientX;
-            const diffX = currentX - startX;
-            if (Math.abs(diffX) > 5) { // Umbral para detectar desplazamiento
-                shouldMoveCarousel = true;
-            }
-            slides.style.transform = `translateX(${currentPosition + diffX}px)`;
+            movedDistance = currentX - startX;
+            slides.style.transform = `translateX(${currentPosition + movedDistance}px)`;
         }, { passive: true });
 
         carousel.addEventListener('touchend', (e) => {
@@ -1487,7 +1492,7 @@
             const endX = e.changedTouches[0].clientX;
             const diffX = endX - startX;
 
-            if (shouldMoveCarousel && Math.abs(diffX) > 50) { // Umbral para mover el carrusel
+            if (Math.abs(diffX) > 50) {
                 currentPosition += diffX;
                 slides.style.transition = 'transform 0.3s ease-in-out';
                 const totalWidth = updateTotalWidth();
@@ -1495,7 +1500,6 @@
                 if (currentPosition > 0) currentPosition = -totalWidth;
                 slides.style.transform = `translateX(${currentPosition}px)`;
             }
-            shouldMoveCarousel = false;
         }, { passive: true });
 
         let autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
