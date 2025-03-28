@@ -452,21 +452,47 @@
     }
     /* Estilos para la notificación personalizada */
     #custom-notification {
-        max-width: 300px;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        background-color: #28a745;
-        color: white;
-        padding: 15px;
-        border-radius: 5px;
-        z-index: 1000;
+    max-width: 250px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    background-color: #28a745;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+#custom-notification.show {
+    opacity: 1;
+}
+
+#custom-notification svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+}
+
+@media (max-width: 640px) {
+    #custom-notification {
+        max-width: 180px;
+        padding: 6px 10px;
+        top: 100px; /* Más abajo en móvil */
+        font-size: 0.75rem;
     }
-    #custom-notification.show {
-        opacity: 1;
+
+    #custom-notification svg {
+        width: 16px;
+        height: 16px;
     }
+}
     /* Estilos para el contador del carrito */
     #cart-count {
         display: none;
@@ -560,7 +586,71 @@
             justify-content: center;
         }
     }
-    
+    .Tienda-Sport {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 12px;
+        padding: 8px 14px;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05), 0px 4px 6px rgba(0, 0, 0, 0.06);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0px;
+        color: rgba(36, 36, 36, 1);
+        transition: all 0.3s;
+        font-family: ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        z-index: 9999;
+      }
+  
+      .Tienda-Sport:hover {
+        background: rgba(34, 139, 34, 1);
+      }
+  
+      .Tienda-Sport {
+        background: rgba(242, 242, 242, 1);
+        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+      }
+  
+      .Tienda-Sport img {
+        width: 30px;
+        height: 30px;
+        pointer-events: none;
+      }
+  
+      #root {
+        height: 120vh;
+      }
+      
+footer .social-icon {
+  fill: #ffffff !important; /* Blanco puro */
+}
+
+/* Mantener blanco en hover */
+footer a:hover .social-icon {
+  fill: #ffffff !important; /* Blanco en hover */
+}
+
+/* Tamaño y visibilidad en móvil */
+@media (max-width: 640px) {
+  footer .TEXT-LINK {
+    font-size: 0.9rem;
+  }
+  footer .DESC {
+    font-size: 0.75rem;
+  }
+  footer ._icon-wrapper_1a3wa_1 {
+    font-size: 1.25rem; /* text-xl (20px) en móvil */
+  }
+  footer .inline-flex {
+    width: 2.5rem; /* 40px en móvil */
+    height: 2.5rem;
+  }
+}
 </style>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -1163,13 +1253,77 @@
   </section>
 
 
-  <!-- Notificación personalizada -->
-  <div id="custom-notification" class="fixed bottom-10 right-10 bg-green-600 text-white p-4 rounded-lg shadow-lg flex items-center gap-2 opacity-0 transition-opacity duration-500 z-50">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-    </svg>
-    <span id="notification-message"></span>
+
+  <footer class="py-10 bg-gray-900 dark:bg-gray-700">
+  <div style="opacity: 1; transform: none;">
+    <div class="px-4 mx-auto max-w-7xl py-10 flex flex-col items-center gap-16">
+      <ul class="w-full grid grid-cols-2 text-center gap-6 md:grid-cols-5">
+        <li>
+          <a href="Sobrenosotros.html" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
+            <div class="_editable_jwu41_1">Sobre Nosotros</div>
+          </a>
+        </li>
+        <li>
+          <a href="productos.html" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
+            <div class="_editable_jwu41_1">Nuestros Productos</div>
+          </a>
+        </li>
+        <li>
+          <a href="index.html" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
+            <div class="_editable_jwu41_1">Inicio</div>
+          </a>
+        </li>
+        <li>
+          <a href="Sobrenosotros.html#contactanos" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
+            <div class="_editable_jwu41_1">Contáctanos</div>
+          </a>
+        </li>
+        <li>
+          <a href="index.html#blog" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
+            <div class="_editable_jwu41_1">Blog y Noticias</div>
+          </a>
+        </li>
+      </ul>
+      <div class="flex flex-col gap-6">
+        <ul class="flex items-center justify-center gap-6">
+          <li>
+            <a href="https://facebook.com/SportELite" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-300 transition-all duration-200 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:bg-gray-600">
+              <img src="img/facebook.png" alt="Facebook" class="w-6 h-6">
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com/SportElite" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-300 transition-all duration-200 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:bg-gray-600">
+              <img src="img/insta.png" alt="Instagram" class="w-6 h-6">
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/SportElite" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-300 transition-all duration-200 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:bg-gray-600">
+              <img src="img/x.png" alt="X" class="w-6 h-6">
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-300 transition-all duration-200 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:bg-gray-600">
+              <img src="img/whatsapp.png" alt="WhatsApp" class="w-6 h-6">
+            </a>
+          </li>
+        </ul>
+        <p class="DESC text-base font-normal text-center text-white dark:text-white">
+          <div class="_editable_jwu41_1">© 2025 Sport Elite. Todos los derechos reservados.</div>
+        </p>
+      </div>
+    </div>
   </div>
+</footer>
+
+
+ <!-- Notificación personalizada -->
+<div id="custom-notification" class="fixed top-10 right-10 bg-green-600 text-white p-2 rounded-lg shadow-lg flex items-center opacity-0 transition-opacity duration-500 z-50">
+  <span id="notification-message"></span>
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+  </svg>
+</div>
+  
 
   <script>
     // Control del scroll
@@ -1524,6 +1678,31 @@
         initializeCarousel('zapatillas-carousel', 'zapatillas-slides', 'zapatillas-prev', 'zapatillas-next');
         initializeCarousel('accesorios-carousel', 'accesorios-slides', 'accesorios-prev', 'accesorios-next');
     });
+
+
+    
 </script>
+<link rel="stylesheet" href="https://use.typekit.net/your-kit-id.css">
+
+
+
+  
+    <script type="module" src="https://wa.link/eej87k"></script>
+
+ 
+<!-- badge start-->
+<a class="Tienda-Sport" id="TiendaSport" href="https://wa.link/eej87k" target="_blank">
+  <img src="c:\Users\yilbr\Downloads\whatsapp.png" alt="Whatsap-badge">
+  Whatsapp
+</a>
+
+
+
+
+<!-- Pie de página -->
+<footer class="py-10 bg-white dark:bg-slate-800">
+  <!-- Código del footer pegado aquí -->
+</footer>
+
 </body>
 </html>
