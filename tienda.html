@@ -1325,362 +1325,395 @@ footer a:hover .social-icon {
 </div>
   
 
-  <script>
-    // Control del scroll
-    let lastScrollTop = 0;
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        header.classList.toggle('menu-hidden', scrollTop > lastScrollTop);
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+<script>
+  // Control del scroll
+  let lastScrollTop = 0;
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', function() {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      header.classList.toggle('menu-hidden', scrollTop > lastScrollTop);
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  });
+
+  // Control del menú hamburguesa
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('menu-content').classList.toggle('active');
+  });
+
+  // Expandir buscador al hacer clic en el ícono en móvil
+  document.querySelector('#search-form button').addEventListener('click', function(e) {
+      if (window.innerWidth <= 640 && !document.getElementById('search-form').classList.contains('active')) {
+          e.preventDefault();
+          document.getElementById('search-form').classList.add('active');
+          document.getElementById('search-input').focus();
+      }
+  });
+
+  // Colapsar buscador al perder foco
+  document.getElementById('search-input').addEventListener('blur', function() {
+      if (window.innerWidth <= 640 && document.getElementById('search-input').value === '') {
+          document.getElementById('search-form').classList.remove('active');
+      }
+  });
+
+  // Control de búsqueda con Enter o clic en la lupa
+  document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      performSearch();
+  });
+
+  document.querySelector('#search-form button').addEventListener('click', function(e) {
+      if (window.innerWidth > 640 || document.getElementById('search-form').classList.contains('active')) {
+          e.preventDefault();
+          performSearch();
+      }
+  });
+
+  function performSearch() {
+      const filtro = document.getElementById('search-input').value.toLowerCase().trim();
+      const productos = document.querySelectorAll('.producto');
+      const searchResults = document.getElementById('search-results');
+      const searchResultsContainer = document.getElementById('search-results-container');
+      const uniformesSection = document.getElementById('uniformes-section');
+      const futbolSection = document.getElementById('futbol-section');
+
+      searchResultsContainer.innerHTML = '';
+
+      if (filtro === '') {
+          searchResults.classList.remove('active');
+          uniformesSection.style.display = 'block';
+          futbolSection.style.display = 'block';
+          return;
+      }
+
+      uniformesSection.style.display = 'none';
+      futbolSection.style.display = 'none';
+      searchResults.classList.add('active');
+
+      const productosFiltrados = Array.from(productos).filter(producto => {
+          const nombre = producto.getAttribute('data-nombre').toLowerCase();
+          return nombre.includes(filtro);
+      });
+
+      if (productosFiltrados.length === 0) {
+          searchResultsContainer.innerHTML = '<p>No se encontraron productos.</p>';
+      } else {
+          productosFiltrados.forEach(producto => {
+              const clon = producto.cloneNode(true);
+              searchResultsContainer.appendChild(clon);
+          });
+      }
+  }
+
+  // Carrito de Compras con localStorage
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let isProcessing = false;
+  const cartModal = document.getElementById('cart-modal');
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const confirmModal = document.getElementById('confirm-modal');
+  const confirmDetails = document.getElementById('confirm-details');
+  const cartCount = document.getElementById('cart-count');
+  const notification = document.getElementById('custom-notification');
+  const notificationMessage = document.getElementById('notification-message');
+
+  function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+  }
+
+  function showNotification(message) {
+      notificationMessage.textContent = message;
+      notification.style.display = 'block';
+      notification.classList.add('show');
+      setTimeout(() => {
+          notification.classList.remove('show');
+          setTimeout(() => {
+              notification.style.display = 'none';
+          }, 500);
+      }, 3000);
+  }
+
+  function updateCartCount() {
+      cartCount.textContent = cart.length;
+      cartCount.classList.toggle('active', cart.length > 0);
+  }
+
+  function addToCart(event) {
+      if (isProcessing) return;
+      isProcessing = true;
+
+      const button = event.target.closest('.boton-agregar');
+      if (!button) {
+          isProcessing = false;
+          return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const name = button.getAttribute('data-name');
+      const price = parseFloat(button.getAttribute('data-price'));
+      cart.push({ name, price });
+      saveCart();
+      showNotification(`${name} agregado al carrito!`);
+
+      setTimeout(() => {
+          isProcessing = false;
+      }, 100);
+  }
+
+  function updateCartModal() {
+      cartItems.innerHTML = '';
+      let total = 0;
+      if (cart.length === 0) {
+          cartItems.innerHTML = '<li>El carrito está vacío</li>';
+      } else {
+          cart.forEach((item, index) => {
+              const li = document.createElement('li');
+              li.innerHTML = `
+                  <span>${item.name} - $${item.price.toFixed(2)}</span>
+                  <button class="remove-item" data-index="${index}">X</button>
+              `;
+              cartItems.appendChild(li);
+              total += item.price;
+          });
+          cartItems.querySelectorAll('.remove-item').forEach(button => {
+              button.addEventListener('click', (e) => {
+                  const index = parseInt(e.target.getAttribute('data-index'));
+                  cart.splice(index, 1);
+                  saveCart();
+                  updateCartModal();
+              });
+          });
+      }
+      cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+  }
+
+  document.getElementById('cart-button').addEventListener('click', function() {
+      updateCartModal();
+      cartModal.style.display = 'flex';
+  });
+
+  document.getElementById('close-cart').addEventListener('click', function() {
+      cartModal.style.display = 'none';
+  });
+
+  document.getElementById('buy-button').addEventListener('click', function() {
+      if (cart.length === 0) {
+          alert('El carrito está vacío. Agrega productos antes de comprar.');
+          return;
+      }
+
+      let total = 0;
+      let orderDetails = 'Pedido de Sport Elite Pro:\n\n';
+      cart.forEach(item => {
+          orderDetails += `${item.name} - $${item.price.toFixed(2)}\n`;
+          total += item.price;
+      });
+      orderDetails += `\nTotal: $${total.toFixed(2)}`;
+
+      confirmDetails.textContent = orderDetails;
+      cartModal.style.display = 'none';
+      confirmModal.style.display = 'flex';
+
+      const emailSubject = encodeURIComponent('Nuevo Pedido - Sport Elite Pro');
+      const emailBody = encodeURIComponent(orderDetails);
+      const email = 'sportelite05@gmail.com';
+      const mailtoLink = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
+
+      const whatsappNumber = '+573023218968';
+      const whatsappMessage = encodeURIComponent(orderDetails);
+      const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMessage}`;
+
+      document.getElementById('send-email').onclick = function() {
+          window.location.href = mailtoLink;
+          confirmModal.style.display = 'none';
+      };
+
+      document.getElementById('send-whatsapp').onclick = function() {
+          window.open(whatsappLink, '_blank');
+          confirmModal.style.display = 'none';
+      };
+
+      document.getElementById('cancel-confirm').onclick = function() {
+          confirmModal.style.display = 'none';
+          cartModal.style.display = 'flex';
+      };
+
+      document.getElementById('close-confirm').onclick = function() {
+          confirmModal.style.display = 'none';
+          cartModal.style.display = 'flex';
+      };
+  });
+
+  // Banner
+  const slides = document.getElementById('slides');
+  const slideElements = document.querySelectorAll('.slide');
+  const totalSlides = slideElements.length;
+  let currentSlide = 0;
+
+  function showSlide(index) {
+      currentSlide = (index >= totalSlides) ? 0 : (index < 0) ? totalSlides - 1 : index;
+      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+
+  document.getElementById('next').addEventListener('click', () => showSlide(currentSlide + 1));
+  document.getElementById('prev').addEventListener('click', () => showSlide(currentSlide - 1));
+
+  let autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
+  document.querySelector('.banner').addEventListener('mouseenter', () => clearInterval(autoSlide));
+  document.querySelector('.banner').addEventListener('mouseleave', () => {
+      autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
+  });
+
+  // Carrusel de Uniformes Deportivos
+  function initializeCarousel(carouselId, slidesId, prevId, nextId) {
+    const carousel = document.getElementById(carouselId);
+    const slides = document.getElementById(slidesId);
+    const productos = slides.querySelectorAll('.producto');
+    const totalProductos = productos.length;
+    const stepDesktop = 310;
+    const stepMobile = 210;
+    let currentPosition = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0; // Nueva variable para el eje Y
+    let movedDistanceX = 0;
+    let movedDistanceY = 0; // Nueva variable para el eje Y
+    let moved = false; // Bandera para rastrear movimiento significativo
+
+    productos.forEach(producto => {
+        const clone = producto.cloneNode(true);
+        slides.appendChild(clone);
     });
 
-    // Control del menú hamburguesa
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-        document.getElementById('menu-content').classList.toggle('active');
-    });
-
-    // Expandir buscador al hacer clic en el ícono en móvil
-    document.querySelector('#search-form button').addEventListener('click', function(e) {
-        if (window.innerWidth <= 640 && !document.getElementById('search-form').classList.contains('active')) {
-            e.preventDefault();
-            document.getElementById('search-form').classList.add('active');
-            document.getElementById('search-input').focus();
-        }
-    });
-
-    // Colapsar buscador al perder foco
-    document.getElementById('search-input').addEventListener('blur', function() {
-        if (window.innerWidth <= 640 && document.getElementById('search-input').value === '') {
-            document.getElementById('search-form').classList.remove('active');
-        }
-    });
-
-    // Control de búsqueda con Enter o clic en la lupa
-    document.getElementById('search-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        performSearch();
-    });
-
-    document.querySelector('#search-form button').addEventListener('click', function(e) {
-        if (window.innerWidth > 640 || document.getElementById('search-form').classList.contains('active')) {
-            e.preventDefault();
-            performSearch();
-        }
-    });
-
-    function performSearch() {
-        const filtro = document.getElementById('search-input').value.toLowerCase().trim();
-        const productos = document.querySelectorAll('.producto');
-        const searchResults = document.getElementById('search-results');
-        const searchResultsContainer = document.getElementById('search-results-container');
-        const uniformesSection = document.getElementById('uniformes-section');
-        const futbolSection = document.getElementById('futbol-section');
-
-        searchResultsContainer.innerHTML = '';
-
-        if (filtro === '') {
-            searchResults.classList.remove('active');
-            uniformesSection.style.display = 'block';
-            futbolSection.style.display = 'block';
-            return;
-        }
-
-        uniformesSection.style.display = 'none';
-        futbolSection.style.display = 'none';
-        searchResults.classList.add('active');
-
-        const productosFiltrados = Array.from(productos).filter(producto => {
-            const nombre = producto.getAttribute('data-nombre').toLowerCase();
-            return nombre.includes(filtro);
-        });
-
-        if (productosFiltrados.length === 0) {
-            searchResultsContainer.innerHTML = '<p>No se encontraron productos.</p>';
-        } else {
-            productosFiltrados.forEach(producto => {
-                const clon = producto.cloneNode(true);
-                searchResultsContainer.appendChild(clon);
-            });
-        }
+    function updateStep() {
+        return window.innerWidth <= 640 ? stepMobile : stepDesktop;
     }
 
-    // Carrito de Compras con localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartModal = document.getElementById('cart-modal');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    const confirmModal = document.getElementById('confirm-modal');
-    const confirmDetails = document.getElementById('confirm-details');
-    const cartCount = document.getElementById('cart-count');
-    const notification = document.getElementById('custom-notification');
-    const notificationMessage = document.getElementById('notification-message');
-
-    function saveCart() {
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
+    function updateTotalWidth() {
+        return totalProductos * updateStep();
     }
 
-    function showNotification(message) {
-        notificationMessage.textContent = message;
-        notification.style.display = 'block'; // Mostrar notificación
-        notification.classList.add('show');
-        setTimeout(() => {
-            notification.classList.remove('show');
+    function moveCarousel(direction) {
+        const step = updateStep();
+        const totalWidth = updateTotalWidth();
+        const maxPosition = -totalWidth;
+
+        currentPosition += direction * step;
+
+        if (currentPosition <= maxPosition) {
+            slides.style.transition = 'none';
+            currentPosition = 0;
+            slides.style.transform = `translateX(${currentPosition}px)`;
             setTimeout(() => {
-                notification.style.display = 'none'; // Ocultar completamente después de la transición
-            }, 500); // Coincide con la duración de la transición en CSS (0.5s)
-        }, 3000);
-    }
-
-    function updateCartCount() {
-        cartCount.textContent = cart.length;
-        cartCount.classList.toggle('active', cart.length > 0);
-    }
-
-    function addToCart(event) {
-        const button = event.target.closest('.boton-agregar');
-        if (!button) return;
-        event.stopPropagation();
-        const name = button.getAttribute('data-name');
-        const price = parseFloat(button.getAttribute('data-price'));
-        cart.push({ name, price });
-        saveCart();
-        showNotification(`${name} agregado al carrito!`);
-    }
-
-    function updateCartModal() {
-        cartItems.innerHTML = '';
-        let total = 0;
-        if (cart.length === 0) {
-            cartItems.innerHTML = '<li>El carrito está vacío</li>';
-        } else {
-            cart.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <span>${item.name} - $${item.price.toFixed(2)}</span>
-                    <button class="remove-item" data-index="${index}">X</button>
-                `;
-                cartItems.appendChild(li);
-                total += item.price;
-            });
-            cartItems.querySelectorAll('.remove-item').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const index = parseInt(e.target.getAttribute('data-index'));
-                    cart.splice(index, 1);
-                    saveCart();
-                    updateCartModal();
-                });
-            });
-        }
-        cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-    }
-
-    document.getElementById('cart-button').addEventListener('click', function() {
-        updateCartModal();
-        cartModal.style.display = 'flex';
-    });
-
-    document.getElementById('close-cart').addEventListener('click', function() {
-        cartModal.style.display = 'none';
-    });
-
-    document.getElementById('buy-button').addEventListener('click', function() {
-        if (cart.length === 0) {
-            alert('El carrito está vacío. Agrega productos antes de comprar.');
-            return;
-        }
-
-        let total = 0;
-        let orderDetails = 'Pedido de Sport Elite Pro:\n\n';
-        cart.forEach(item => {
-            orderDetails += `${item.name} - $${item.price.toFixed(2)}\n`;
-            total += item.price;
-        });
-        orderDetails += `\nTotal: $${total.toFixed(2)}`;
-
-        confirmDetails.textContent = orderDetails;
-        cartModal.style.display = 'none';
-        confirmModal.style.display = 'flex';
-
-        const emailSubject = encodeURIComponent('Nuevo Pedido - Sport Elite Pro');
-        const emailBody = encodeURIComponent(orderDetails);
-        const email = 'sportelite05@gmail.com';
-        const mailtoLink = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
-
-        const whatsappNumber = '+573023218968';
-        const whatsappMessage = encodeURIComponent(orderDetails);
-        const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMessage}`;
-
-        document.getElementById('send-email').onclick = function() {
-            window.location.href = mailtoLink;
-            confirmModal.style.display = 'none';
-        };
-
-        document.getElementById('send-whatsapp').onclick = function() {
-            window.open(whatsappLink, '_blank');
-            confirmModal.style.display = 'none';
-        };
-
-        document.getElementById('cancel-confirm').onclick = function() {
-            confirmModal.style.display = 'none';
-            cartModal.style.display = 'flex';
-        };
-
-        document.getElementById('close-confirm').onclick = function() {
-            confirmModal.style.display = 'none';
-            cartModal.style.display = 'flex';
-        };
-    });
-
-    // Banner
-    const slides = document.getElementById('slides');
-    const slideElements = document.querySelectorAll('.slide');
-    const totalSlides = slideElements.length;
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        currentSlide = (index >= totalSlides) ? 0 : (index < 0) ? totalSlides - 1 : index;
-        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-
-    document.getElementById('next').addEventListener('click', () => showSlide(currentSlide + 1));
-    document.getElementById('prev').addEventListener('click', () => showSlide(currentSlide - 1));
-
-    let autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
-    document.querySelector('.banner').addEventListener('mouseenter', () => clearInterval(autoSlide));
-    document.querySelector('.banner').addEventListener('mouseleave', () => {
-        autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
-    });
-
-    // Carrusel de Uniformes Deportivos
-    function initializeCarousel(carouselId, slidesId, prevId, nextId) {
-        const carousel = document.getElementById(carouselId);
-        const slides = document.getElementById(slidesId);
-        const productos = slides.querySelectorAll('.producto');
-        const totalProductos = productos.length;
-        const stepDesktop = 310;
-        const stepMobile = 210;
-        let currentPosition = 0;
-        let isDragging = false;
-        let startX = 0;
-        let movedDistance = 0;
-
-        // Clonar productos para el efecto infinito
-        productos.forEach(producto => {
-            const clone = producto.cloneNode(true);
-            slides.appendChild(clone);
-        });
-
-        function updateStep() {
-            return window.innerWidth <= 640 ? stepMobile : stepDesktop;
-        }
-
-        function updateTotalWidth() {
-            return totalProductos * updateStep();
-        }
-
-        function moveCarousel(direction) {
-            const step = updateStep();
-            const totalWidth = updateTotalWidth();
-            const maxPosition = -totalWidth;
-
-            currentPosition += direction * step;
-
-            if (currentPosition <= maxPosition) {
-                slides.style.transition = 'none';
-                currentPosition = 0;
-                slides.style.transform = `translateX(${currentPosition}px)`;
-                setTimeout(() => {
-                    slides.style.transition = 'transform 0.3s ease-in-out';
-                }, 50);
-            } else if (currentPosition > 0) {
-                slides.style.transition = 'none';
-                currentPosition = maxPosition;
-                slides.style.transform = `translateX(${currentPosition}px)`;
-                setTimeout(() => {
-                    slides.style.transition = 'transform 0.3s ease-in-out';
-                }, 50);
-            } else {
                 slides.style.transition = 'transform 0.3s ease-in-out';
-                slides.style.transform = `translateX(${currentPosition}px)`;
-            }
+            }, 50);
+        } else if (currentPosition > 0) {
+            slides.style.transition = 'none';
+            currentPosition = maxPosition;
+            slides.style.transform = `translateX(${currentPosition}px)`;
+            setTimeout(() => {
+                slides.style.transition = 'transform 0.3s ease-in-out';
+            }, 50);
+        } else {
+            slides.style.transition = 'transform 0.3s ease-in-out';
+            slides.style.transform = `translateX(${currentPosition}px)`;
         }
+    }
 
-        document.getElementById(nextId).addEventListener('click', () => moveCarousel(-1));
-        document.getElementById(prevId).addEventListener('click', () => moveCarousel(1));
+    document.getElementById(nextId).addEventListener('click', () => moveCarousel(-1));
+    document.getElementById(prevId).addEventListener('click', () => moveCarousel(1));
 
-        // Delegación de eventos para botones en el carrusel
-        slides.addEventListener('click', function(event) {
+    slides.addEventListener('click', function(event) {
+        if (window.innerWidth > 640) {
             const button = event.target.closest('.boton-agregar');
             if (button) {
                 addToCart(event);
             }
-        });
-
-        slides.addEventListener('touchend', function(event) {
-            const button = event.target.closest('.boton-agregar');
-            if (button && Math.abs(movedDistance) < 20) {
-                addToCart(event);
-            }
-        }, { passive: true });
-
-        // Eventos táctiles para el carrusel
-        carousel.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-            movedDistance = 0;
-            slides.style.transition = 'none';
-        }, { passive: true });
-
-        carousel.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            const currentX = e.touches[0].clientX;
-            movedDistance = currentX - startX;
-            slides.style.transform = `translateX(${currentPosition + movedDistance}px)`;
-        }, { passive: true });
-
-        carousel.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            const endX = e.changedTouches[0].clientX;
-            const diffX = endX - startX;
-
-            if (Math.abs(diffX) > 50) {
-                currentPosition += diffX;
-                slides.style.transition = 'transform 0.3s ease-in-out';
-                const totalWidth = updateTotalWidth();
-                if (currentPosition <= -totalWidth) currentPosition = 0;
-                if (currentPosition > 0) currentPosition = -totalWidth;
-                slides.style.transform = `translateX(${currentPosition}px)`;
-            }
-        }, { passive: true });
-
-        let autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
-        carousel.addEventListener('mouseenter', () => clearInterval(autoSlideCarousel));
-        carousel.addEventListener('mouseleave', () => {
-            autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
-        });
-
-        window.addEventListener('resize', () => {
-            currentPosition = 0;
-            slides.style.transform = `translateX(${currentPosition}px)`;
-        });
-
-        slides.style.width = `${updateTotalWidth() * 2}px`;
-    }
-
-    // Inicialización al cargar la página
-    document.addEventListener('DOMContentLoaded', () => {
-        updateCartCount();
-        initializeCarousel('uniformes-carousel', 'uniformes-slides', 'uniformes-prev', 'uniformes-next');
-        initializeCarousel('clubes-carousel', 'clubes-slides', 'clubes-prev', 'clubes-next');
-        initializeCarousel('zapatillas-carousel', 'zapatillas-slides', 'zapatillas-prev', 'zapatillas-next');
-        initializeCarousel('accesorios-carousel', 'accesorios-slides', 'accesorios-prev', 'accesorios-next');
+        }
     });
 
+    carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY; // Capturamos la posición inicial en Y
+        isDragging = true;
+        moved = false; // Reiniciamos la bandera
+        movedDistanceX = 0;
+        movedDistanceY = 0;
+        slides.style.transition = 'none';
+    }, { passive: true });
 
-    
+    carousel.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY; // Capturamos la posición actual en Y
+        movedDistanceX = currentX - startX;
+        movedDistanceY = currentY - startY; // Calculamos el desplazamiento en Y
+
+        // Si el movimiento en X o Y excede el umbral, consideramos que hubo deslizamiento
+        if (Math.abs(movedDistanceX) > 30 || Math.abs(movedDistanceY) > 30) {
+            moved = true; // Indicamos que hubo movimiento significativo
+        }
+
+        // Solo movemos el carrusel en el eje X
+        slides.style.transform = `translateX(${currentPosition + movedDistanceX}px)`;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY; // Capturamos la posición final en Y
+        const diffX = endX - startX;
+        const diffY = endY - startY; // Calculamos la diferencia en Y
+
+        // Si hay movimiento significativo en X, movemos el carrusel
+        if (Math.abs(diffX) > 30) {
+            currentPosition += diffX;
+            slides.style.transition = 'transform 0.3s ease-in-out';
+            const totalWidth = updateTotalWidth();
+            if (currentPosition <= -totalWidth) currentPosition = 0;
+            if (currentPosition > 0) currentPosition = -totalWidth;
+            slides.style.transform = `translateX(${currentPosition}px)`;
+        }
+        // Si no hubo movimiento significativo en X ni en Y, consideramos un toque estático
+        else if (!moved && Math.abs(diffX) <= 30 && Math.abs(diffY) <= 30) {
+            const button = e.target.closest('.boton-agregar');
+            if (button) {
+                addToCart(e);
+            }
+        }
+    }, { passive: true });
+
+    let autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
+    carousel.addEventListener('mouseenter', () => clearInterval(autoSlideCarousel));
+    carousel.addEventListener('mouseleave', () => {
+        autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
+    });
+
+    window.addEventListener('resize', () => {
+        currentPosition = 0;
+        slides.style.transform = `translateX(${currentPosition}px)`;
+    });
+
+    slides.style.width = `${updateTotalWidth() * 2}px`;
+}
+
+
+  // Inicialización al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      initializeCarousel('uniformes-carousel', 'uniformes-slides', 'uniformes-prev', 'uniformes-next');
+      initializeCarousel('clubes-carousel', 'clubes-slides', 'clubes-prev', 'clubes-next');
+      initializeCarousel('zapatillas-carousel', 'zapatillas-slides', 'zapatillas-prev', 'zapatillas-next');
+      initializeCarousel('accesorios-carousel', 'accesorios-slides', 'accesorios-prev', 'accesorios-next');
+  });
+</script>
+
+
+
 </script>
 <link rel="stylesheet" href="https://use.typekit.net/your-kit-id.css">
 
