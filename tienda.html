@@ -23,7 +23,6 @@
       font-family: 'DIN Next Pro', sans-serif;
       font-size: 1.25rem;
       line-height: 1.6;
-      margin: 0;
     }
     h2, h3 {
       text-transform: uppercase;
@@ -174,6 +173,16 @@
       font-size: 1rem;
     }
     .slides a.slide {
+      min-width: 100%;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 20px;
+      box-sizing: border-box;
       text-decoration: none;
       color: inherit;
     }
@@ -198,6 +207,7 @@
     }
     .arrow:hover {
       color: #ff9500;
+      background: none;
     }
     /* Carrusel */
     .carousel {
@@ -217,11 +227,21 @@
       display: none;
     }
     .carousel-slides {
-      display: flex;
-      transition: transform 0.3s ease-in-out;
-      width: max-content;
-      gap: 10px;
-    }
+  display: flex;
+  flex-shrink: 0; /* Evita que los elementos se compriman */
+  gap: 10px; /* Espacio entre productos */
+}
+
+.producto {
+  width: 300px; /* Ancho fijo en escritorio */
+  flex-shrink: 0; /* Evita que los productos se reduzcan */
+}
+
+@media (max-width: 640px) {
+  .producto {
+    width: 200px; /* Ancho fijo en móvil */
+  }
+}
     .carousel-wrapper {
       position: relative;
       width: 100%;
@@ -230,26 +250,31 @@
       overflow: hidden;
     }
     .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 2rem;
-      z-index: 10;
-    }
-    .carousel-arrow-left {
-      left: 15px;
-    }
-    .carousel-arrow-right {
-      right: 15px;
-    }
-    .carousel-arrow:hover {
-      color: #ff9500;
-    }
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none; /* Sin fondo */
+    color: white; /* Color de las flechas */
+    border: none; /* Sin borde */
+    padding: 10px;
+    cursor: pointer;
+    font-size: 2rem; /* Tamaño de las flechas */
+    z-index: 20; /* Aseguramos que estén por encima de los productos */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Opcional: sombra para mejor visibilidad */
+}
+
+.carousel-arrow-left {
+    left: 15px;
+}
+
+.carousel-arrow-right {
+    right: 15px;
+}
+
+.carousel-arrow:hover {
+    color: #ff9500; /* Color al pasar el mouse */
+    background: none; /* Sin fondo al hacer hover */
+}
     /* Estilos para el menú de categorías */
     .categories-container {
       position: relative;
@@ -426,15 +451,7 @@
     #custom-notification {
       max-width: 300px;
       opacity: 0;
-      transition: opacity 0.5s ease;
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background-color: #28a745;
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
-      z-index: 1000;
+钻 transition: opacity 0.5s ease;
     }
     #custom-notification.show {
       opacity: 1;
@@ -442,20 +459,9 @@
     /* Estilos para el contador del carrito */
     #cart-count {
       display: none;
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background-color: #ff9500;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      font-size: 12px;
-      text-align: center;
-      line-height: 20px;
     }
     #cart-count.active {
-      display: block;
+      display: flex;
     }
     /* Media Queries para pantallas pequeñas */
     @media (max-width: 640px) {
@@ -572,7 +578,7 @@
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
           </svg>
-          <span id="cart-count" class="active">0</span>
+          <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
         </button>
         <button class="text-black" id="menu-toggle">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -676,78 +682,139 @@
           Donde la pasión por el deporte vive. Descubre nuestra línea deportiva premium.
         </p>
       </div>
-      <div class="carousel-wrapper">
-        <div class="carousel" id="uniformes-carousel">
-          <div class="carousel-slides" id="uniformes-slides">
-            <div class="producto" data-nombre="zapatillas elite speed">
-              <a href="zapatillas-elite-speed.html" class="product-link">
+      <section id="uniformes-section">
+        <div class="carousel-wrapper">
+          <div class="carousel" id="uniformes-carousel">
+            <div class="carousel-slides" id="uniformes-slides">
+            <div class="producto" data-nombre="Uniforme Francia">
+              <a href="Francia.html" class="product-link">
                 <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/c14a3125-b2c8-4b68-89ba-b47ed701274d.jpeg?format=webp" alt="Zapatillas Elite Speed">
                 <div class="contenido">
-                  <p>Zapatillas Elite Speed</p>
-                  <p class="precio">$50.00</p>
+                  <p>Uniforme francia </p>
+                  <p class="precio">$30.000</p>
                 </div>
               </a>
-              <button class="boton-agregar" data-name="Zapatillas Elite Speed" data-price="50.00">
+              <button class="boton-agregar" data-name="Uniforme Francia" data-price="30.000">
                 Agregar
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
               </button>
             </div>
-            <div class="producto" data-nombre="camiseta prodry">
-              <a href="camiseta-prodry.html" class="product-link">
+            <div class="producto" data-nombre="camiseta Colombia">
+              <a href="colombia.html" class="product-link">
                 <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" alt="Camiseta ProDry">
                 <div class="contenido">
-                  <p>Camiseta ProDry</p>
-                  <p class="precio">$15.00</p>
+                  <p>Camiseta Colombia</p>
+                  <p class="precio">$40.000</p>
                 </div>
               </a>
-              <button class="boton-agregar" data-name="Camiseta ProDry" data-price="15.00">
+              <button class="boton-agregar" data-name="Camiseta Colombia" data-price="40.000">
                 Agregar
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
               </button>
             </div>
-            <div class="producto" data-nombre="mochila titan">
-              <a href="mochila-titan.html" class="product-link">
-                <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Mochila Titan">
+            <div class="producto" data-nombre="Uniforme Alemania">
+              <a href="Alemania.html" class="product-link">
+                <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Uniforme Alemania">
                 <div class="contenido">
-                  <p>Mochila Titan</p>
-                  <p class="precio">$40.00</p>
+                  <p>Uniforme Alemania</p>
+                  <p class="precio">$30.00</p>
                 </div>
               </a>
-              <button class="boton-agregar" data-name="Mochila Titan" data-price="40.00">
+              <button class="boton-agregar" data-name="Uniforme Alemania" data-price="30.00">
                 Agregar
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
               </button>
             </div>
-            <div class="producto" data-nombre="uniforme pro">
-              <a href="uniforme-pro.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
+            <div class="producto" data-nombre="uniforme Portugal">
+              <a href="Portugal.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme Portugal">
                 <div class="contenido">
-                  <p>Uniforme Pro</p>
-                  <p class="precio">$60.00</p>
+                  <p>Uniforme Portugal</p>
+                  <p class="precio">$30.000</p>
                 </div>
               </a>
-              <button class="boton-agregar" data-name="Uniforme Pro" data-price="60.00">
+              <button class="boton-agregar" data-name="Uniforme Portugal" data-price="30.000">
                 Agregar
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
               </button>
             </div>
-            <div class="producto" data-nombre="uniforme elite">
-              <a href="uniforme-elite.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
+            <div class="producto" data-nombre="uniforme Italia">
+              <a href="italia.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme Italia">
                 <div class="contenido">
-                  <p>Uniforme Elite</p>
-                  <p class="precio">$70.00</p>
+                  <p>Uniforme Italia</p>
+                  <p class="precio">$30.000</p>
                 </div>
               </a>
-              <button class="boton-agregar" data-name="Uniforme Elite" data-price="70.00">
+              <button class="boton-agregar" data-name="Uniforme Italia" data-price="30.000">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="producto" data-nombre="uniforme Brasil">
+              <a href="Brasil.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme Brasil">
+                <div class="contenido">
+                  <p>Uniforme Brasil</p>
+                  <p class="precio">$30.000</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Uniforme Brasil" data-price="30.000">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="producto" data-nombre="uniforme Argentina">
+              <a href="Argentina.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme Argentina">
+                <div class="contenido">
+                  <p>Uniforme Argentina</p>
+                  <p class="precio">$30.000</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Uniforme Argentina" data-price="30.000">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="producto" data-nombre="Camisa Colombia 100 Años">
+              <a href="Colombia100.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Camisa Colombia 100 Años">
+                <div class="contenido">
+                  <p>Camisa colombia 100 Años</p>
+                  <p class="precio">$40.000</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Camisa Colombia 100 Años" data-price="40.000">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="producto" data-nombre="uniforme Estados Unidos">
+              <a href="Estados-Unidos.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme Estados Unidos">
+                <div class="contenido">
+                  <p>Uniforme Estados Unidos</p>
+                  <p class="precio">$30.000</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Uniforme Estados Unidos" data-price="30.000">
                 Agregar
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -757,63 +824,92 @@
           </div>
         </div>
         <button class="carousel-arrow carousel-arrow-left" id="uniformes-prev">❮</button>
-        <button class="carousel-arrow carousel-arrow-right" id="uniformes-next">❯</button>
+    <button class="carousel-arrow carousel-arrow-right" id="uniformes-next">❯</button>
       </div>
     </div>
   </section>
-
-  <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden" id="futbol-section">
+  <section id="clubes-section">
     <div class="mx-auto max-w-7xl px-1 lg:px-2">
       <div class="mx-auto max-w-2xl text-center mb-12">
         <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
-          Uniformes de Fútbol
+          Uniformes de Clubes 
         </h2>
-        <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
-          Diseñados para el rendimiento en la cancha, nuestros uniformes de fútbol combinan estilo, comodidad y tecnología avanzada.
-        </p>
       </div>
       <div class="carousel-wrapper">
-        <div class="carousel" id="futbol-carousel">
-          <div class="carousel-slides" id="futbol-slides">
-            <div class="producto" data-nombre="uniforme pro">
-              <a href="uniforme-pro.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Pro">
+        <div class="carousel" id="clubes-carousel">
+          <div class="carousel-slides" id="clubes-slides">
+
+            <div class="producto" data-nombre="Uniforme liverpool">
+              <a href="liverpool.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme liverpool">
                 <div class="contenido">
-                  <p>Uniforme Pro</p>
-                  <p class="precio">$60.00</p>
+                  <p>Uniforme liverpool</p>
+                  <p class="precio">$30.000</p>
                 </div>
               </a>
-              <button class="boton-agregar" data-name="Uniforme Pro" data-price="60.00">
+              <button class="boton-agregar" data-name="Uniforme liverpool" data-price="30.000">
                 Agregar
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
               </button>
             </div>
-            <div class="producto" data-nombre="uniforme elite">
-              <a href="uniforme-elite.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Elite">
+            <div class="producto" data-nombre="uniforme Barcelona">
+              <a href="Barcelona.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme Barcelona">
                 <div class="contenido">
-                  <p>Uniforme Elite</p>
-                  <p class="precio">$70.00</p>
+                  <p>Uniforme Barcelona</p>
+                  <p class="precio">$30.000</p>
                 </div>
               </a>
-              <button class="boton-agregar" data-name="Uniforme Elite" data-price="70.00">
+              <button class="boton-agregar" data-name="Uniforme Barcelona" data-price="30.000">
                 Agregar
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
               </button>
             </div>
-            <div class="producto" data-nombre="uniforme clásico">
-              <a href="uniforme-clasico.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Clásico">
+            <div class="producto" data-nombre="uniforme Real Madrid">
+              <a href="Real-Madrid.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme Real Madrid">
                 <div class="contenido">
-                  <p>Uniforme Clásico</p>
-                  <p class="precio">$45.00</p>
+                  <p>Uniforme Real Madrid</p>
+                  <p class="precio">$30.000</p>
                 </div>
               </a>
-              <button class="boton-agregar" data-name="Uniforme Clásico" data-price="45.00">
+              <button class="boton-agregar" data-name="Uniforme Real Madrid" data-price="30.000">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="producto" data-nombre="uniforme Manchester City">
+              <a href="Manchester-City.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme Manchester City">
+                <div class="contenido">
+                  <p>Uniforme Manchester City</p>
+                  <p class="precio">$30.000</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Uniforme Manchester City" data-price="30.000">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="producto" data-nombre="uniforme PSG">
+              <a href="psg.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Uniforme PSG">
+                <div class="contenido">
+                  <p>Uniforme PSG</p>
+                  <p class="precio">$30.000</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Uniforme PSG" data-price="30.000">
                 Agregar
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -822,11 +918,227 @@
             </div>
           </div>
         </div>
-        <button class="carousel-arrow carousel-arrow-left" id="futbol-prev">❮</button>
-        <button class="carousel-arrow carousel-arrow-right" id="futbol-next">❯</button>
+        <button class="carousel-arrow carousel-arrow-left" id="clubes-prev">❮</button>
+        <button class="carousel-arrow carousel-arrow-right" id="clubes-next">❯</button>
       </div>
     </div>
   </section>
+
+  
+  <section id="zapatillas-section">
+    <div class="mx-auto max-w-7xl px-1 lg:px-2">
+      <div class="mx-auto max-w-2xl text-center mb-12">
+        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
+          Zapatillas
+        </h2>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel" id="zapatillas-carousel">
+          <div class="carousel-slides" id="zapatillas-slides">
+
+
+            <div class="producto" data-nombre="Zapatilla pro">
+              <a href="Zapatillag.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Zapatilla Pro">
+                <div class="contenido">
+                  <p>Zapatilla Pro</p>
+                  <p class="precio">$60.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Zapatilla Pro" data-price="60.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="producto" data-nombre="Zapatilla elite">
+              <a href="Zapatilla.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
+                <div class="contenido">
+                  <p>Zapatilla Elite</p>
+                  <p class="precio">$70.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+
+            <div class="producto" data-nombre="Zapatilla elite">
+              <a href="Zapatilla.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
+                <div class="contenido">
+                  <p>Zapatilla Elite</p>
+                  <p class="precio">$70.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="producto" data-nombre="Zapatilla elite">
+              <a href="Zapatilla.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
+                <div class="contenido">
+                  <p>Zapatilla Elite</p>
+                  <p class="precio">$70.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+
+            <div class="producto" data-nombre="Zapatilla clásico">
+              <a href="Zapatilla-clasico.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Zapatilla Clásico">
+                <div class="contenido">
+                  <p>Zapatilla Clásico</p>
+                  <p class="precio">$45.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Zapatilla Clásico" data-price="45.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-arrow carousel-arrow-left" id="zapatillas-prev">❮</button>
+      <button class="carousel-arrow carousel-arrow-right" id="zapatillas-next">❯</button>
+      </div>
+    </div>
+  </section>
+  <section id="accesorios-section">
+    <div class="mx-auto max-w-7xl px-1 lg:px-2">
+      <div class="mx-auto max-w-2xl text-center mb-12">
+        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
+          Accesorios 
+        </h2>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel" id="accesorios-carousel">
+          <div class="carousel-slides" id="accesorios-slides">
+
+            <div class="producto" data-nombre="Equipo pro">
+              <a href="Equipo-pro.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Equipo Pro">
+                <div class="contenido">
+                  <p>Equipo Pro</p>
+                  <p class="precio">$60.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Equipo Pro" data-price="60.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+
+            
+            <div class="producto" data-nombre="Equipo elite">
+              <a href="Equipo-elite.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Equipo Elite">
+                <div class="contenido">
+                  <p>Equipo Elite</p>
+                  <p class="precio">$70.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Equipo Elite" data-price="70.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="producto" data-nombre="Equipo Sport">
+              <a href="Equipo-Sport.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Equipo Sport">
+                <div class="contenido">
+                  <p>Equipo Sport</p>
+                  <p class="precio">$70.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Equipo Sport" data-price="70.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="producto" data-nombre="Equipo lop">
+              <a href="Equipo-lop.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Equipo lop">
+                <div class="contenido">
+                  <p>Equipo lop</p>
+                  <p class="precio">$70.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Equipo lop" data-price="70.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="producto" data-nombre="Equipo Cal">
+              <a href="Equipo-Cal.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Equipo Cal">
+                <div class="contenido">
+                  <p>Equipo Cal</p>
+                  <p class="precio">$70.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="UEquipo Cal" data-price="70.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="producto" data-nombre="Equipo clásico">
+              <a href="Equipo-clasico.html" class="product-link">
+                <img src="https://via.placeholder.com/150" alt="Equipo Clásico">
+                <div class="contenido">
+                  <p>Equipo Clásico</p>
+                  <p class="precio">$45.00</p>
+                </div>
+              </a>
+              <button class="boton-agregar" data-name="Equipo Clásico" data-price="45.00">
+                Agregar
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-arrow carousel-arrow-left" id="accesorios-prev">❮</button>
+      <button class="carousel-arrow carousel-arrow-right" id="accesorios-next">❯</button>
+      </div>
+    </div>
+  </section>
+
 
   <!-- Notificación personalizada -->
   <div id="custom-notification" class="fixed bottom-10 right-10 bg-green-600 text-white p-4 rounded-lg shadow-lg flex items-center gap-2 opacity-0 transition-opacity duration-500 z-50">
@@ -923,7 +1235,7 @@
             const price = parseFloat(this.getAttribute('data-price'));
             cart.push({ name, price });
             saveCart();
-            showNotification(`${name} agregado al carrito!`);
+            showNotification(`${name} agregadoząt al carrito!`);
           });
           searchResultsContainer.appendChild(clon);
         });
@@ -1097,135 +1409,113 @@
 
     // Carrusel de Uniformes Deportivos
     function initializeCarousel(carouselId, slidesId, prevId, nextId) {
-      const carousel = document.getElementById(carouselId);
-      const slides = document.getElementById(slidesId);
-      const productos = document.querySelectorAll(`#${slidesId} .producto`);
-      const stepDesktop = 310; // Ancho del producto + gap en escritorio
-      const stepMobile = 210; // Ancho del producto + gap en móvil
-      let currentPosition = 0;
-      let startX = 0;
-      let isDragging = false;
+  const carousel = document.getElementById(carouselId);
+  const slides = document.getElementById(slidesId);
+  const productos = slides.querySelectorAll('.producto');
+  const totalProductos = productos.length;
+  const stepDesktop = 310; // Ancho de cada producto + gap en escritorio
+  const stepMobile = 210; // Ancho de cada producto + gap en móvil
+  let currentPosition = 0;
+  let isDragging = false;
+  let startX = 0;
 
-      function updateStep() {
-        return window.innerWidth <= 640 ? stepMobile : stepDesktop;
-      }
+  // Clonar elementos para un efecto infinito
+  productos.forEach(producto => {
+    const clone = producto.cloneNode(true);
+    slides.appendChild(clone);
+  });
 
-      function updateTotalWidth() {
-        return productos.length * updateStep();
-      }
+  function updateStep() {
+    return window.innerWidth <= 640 ? stepMobile : stepDesktop;
+  }
 
-      function snapToNearest() {
-        const step = updateStep();
-        const carouselWidth = carousel.offsetWidth;
-        const maxPosition = -(updateTotalWidth() - carouselWidth);
-        const isMobile = window.innerWidth <= 640;
+  function updateTotalWidth() {
+    return totalProductos * updateStep();
+  }
 
-        if (isMobile) {
-          const nearestIndex = Math.round(-currentPosition / step);
-          const productWidth = step;
-          const centerOffset = (carouselWidth - productWidth) / 2;
-          currentPosition = Math.max(maxPosition, Math.min(0, -(nearestIndex * step) + centerOffset));
-        } else {
-          const nearestIndex = Math.round(-currentPosition / step);
-          currentPosition = Math.max(maxPosition, Math.min(0, -nearestIndex * step));
-        }
+  function moveCarousel(direction) {
+    const step = updateStep();
+    const carouselWidth = carousel.offsetWidth;
+    const totalWidth = updateTotalWidth();
+    const maxPosition = -totalWidth;
 
-        slides.style.transform = `translateX(${currentPosition}px)`;
-      }
+    currentPosition += direction * step;
 
-      function moveCarousel(direction) {
-        const step = updateStep();
-        const carouselWidth = carousel.offsetWidth;
-        const maxPosition = -(updateTotalWidth() - carouselWidth);
-        const isMobile = window.innerWidth <= 640;
-
-        currentPosition += direction * step;
-
-        if (currentPosition <= maxPosition) {
-          // Reiniciar al inicio
-          slides.style.transition = 'transform 0.3s ease-in-out';
-          slides.style.transform = `translateX(${maxPosition}px)`; // Mover al final visible
-          setTimeout(() => {
-            slides.style.transition = 'none';
-            currentPosition = isMobile ? (carouselWidth - step) / 2 : 0; // Centrado en móvil, inicio en escritorio
-            slides.style.transform = `translateX(${currentPosition}px)`;
-            setTimeout(() => {
-              slides.style.transition = 'transform 0.3s ease-in-out';
-            }, 50);
-          }, 300);
-        } else if (currentPosition > 0) {
-          // Reiniciar al final
-          slides.style.transition = 'transform 0.3s ease-in-out';
-          slides.style.transform = `translateX(0px)`; // Mover al inicio visible
-          setTimeout(() => {
-            slides.style.transition = 'none';
-            currentPosition = maxPosition;
-            slides.style.transform = `translateX(${currentPosition}px)`;
-            setTimeout(() => {
-              slides.style.transition = 'transform 0.3s ease-in-out';
-            }, 50);
-          }, 300);
-        } else {
-          snapToNearest();
-        }
-      }
-
-      document.getElementById(nextId).addEventListener('click', function() {
-        moveCarousel(-1);
-      });
-
-      document.getElementById(prevId).addEventListener('click', function() {
-        moveCarousel(1);
-      });
-
-      // Soporte para deslizar en móviles
-      carousel.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-        clearInterval(autoUniformesSlide);
-      });
-
-      carousel.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        const currentX = e.touches[0].clientX;
-        const diffX = currentX - startX;
-        slides.style.transform = `translateX(${currentPosition + diffX}px)`;
-      });
-
-      carousel.addEventListener('touchend', (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        const endX = e.changedTouches[0].clientX;
-        const diffX = endX - startX;
-        currentPosition += diffX;
-        snapToNearest();
-
-        autoUniformesSlide = setInterval(() => {
-          moveCarousel(-1);
-        }, 5000);
-      });
-
-      let autoUniformesSlide = setInterval(() => {
-        moveCarousel(-1);
-      }, 5000);
-
-      carousel.addEventListener('mouseenter', () => {
-        clearInterval(autoUniformesSlide);
-      });
-
-      carousel.addEventListener('mouseleave', () => {
-        autoUniformesSlide = setInterval(() => {
-          moveCarousel(-1);
-        }, 5000);
-      });
-
-      window.addEventListener('resize', () => {
-        snapToNearest();
-      });
-
-      // Posición inicial
-      snapToNearest();
+    // Si llegamos al final, reiniciamos al inicio sin transición
+    if (currentPosition <= maxPosition) {
+      slides.style.transition = 'none';
+      currentPosition = 0;
+      slides.style.transform = `translateX(${currentPosition}px)`;
+      setTimeout(() => {
+        slides.style.transition = 'transform 0.3s ease-in-out';
+      }, 50);
+    } 
+    // Si vamos hacia atrás más allá del inicio, saltamos al final
+    else if (currentPosition > 0) {
+      slides.style.transition = 'none';
+      currentPosition = maxPosition;
+      slides.style.transform = `translateX(${currentPosition}px)`;
+      setTimeout(() => {
+        slides.style.transition = 'transform 0.3s ease-in-out';
+      }, 50);
+    } 
+    // Movimiento normal
+    else {
+      slides.style.transition = 'transform 0.3s ease-in-out';
+      slides.style.transform = `translateX(${currentPosition}px)`;
     }
+  }
+
+  // Botones de navegación
+  document.getElementById(nextId).addEventListener('click', () => moveCarousel(-1));
+  document.getElementById(prevId).addEventListener('click', () => moveCarousel(1));
+
+  // Soporte para deslizar con el dedo
+  carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    slides.style.transition = 'none';
+  });
+
+  carousel.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const currentX = e.touches[0].clientX;
+    const diffX = currentX - startX;
+    slides.style.transform = `translateX(${currentPosition + diffX}px)`;
+  });
+
+  carousel.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    const endX = e.changedTouches[0].clientX;
+    const diffX = endX - startX;
+    currentPosition += diffX;
+    slides.style.transition = 'transform 0.3s ease-in-out';
+
+    const totalWidth = updateTotalWidth();
+    if (currentPosition <= -totalWidth) currentPosition = 0;
+    if (currentPosition > 0) currentPosition = -totalWidth;
+    slides.style.transform = `translateX(${currentPosition}px)`;
+  });
+
+  // Auto-desplazamiento
+  let autoSlide = setInterval(() => moveCarousel(-1), 5000);
+
+  carousel.addEventListener('mouseenter', () => clearInterval(autoSlide));
+  carousel.addEventListener('mouseleave', () => {
+    autoSlide = setInterval(() => moveCarousel(-1), 5000);
+  });
+
+  // Ajustar al redimensionar
+  window.addEventListener('resize', () => {
+    currentPosition = 0;
+    slides.style.transform = `translateX(${currentPosition}px)`;
+  });
+
+  // Asegurar que el carrusel sea lo suficientemente ancho
+  slides.style.width = `${updateTotalWidth() * 2}px`; // Duplicamos para los clones
+}
+
 
     // Carrusel Infinito para Uniformes de Fútbol
     function initializeInfiniteCarousel(carouselId, slidesId, prevId, nextId) {
@@ -1302,9 +1592,14 @@
       });
     }
 
-    // Inicializar ambos carruseles
+   
+    
     initializeCarousel('uniformes-carousel', 'uniformes-slides', 'uniformes-prev', 'uniformes-next');
-    initializeInfiniteCarousel('futbol-carousel', 'futbol-slides', 'futbol-prev', 'futbol-next');
+    initializeCarousel('clubes-carousel', 'clubes-slides', 'clubes-prev', 'clubes-next');
+    initializeCarousel('zapatillas-carousel', 'zapatillas-slides', 'zapatillas-prev', 'zapatillas-next');
+    initializeCarousel('accesorios-carousel', 'accesorios-slides', 'accesorios-prev', 'accesorios-next');
+
+    
   </script>
 </body>
 </html>
