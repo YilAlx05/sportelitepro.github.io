@@ -19,10 +19,25 @@
         font-weight: 700;
         font-style: normal;
     }
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
     body {
         font-family: 'DIN Next Pro', sans-serif;
         font-size: 1.25rem;
         line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    main {
+        flex: 1 0 auto;
+    }
+    footer {
+        flex-shrink: 0;
+        margin: 0;
     }
     h2, h3 {
         text-transform: uppercase;
@@ -62,20 +77,20 @@
         padding: 0 5px;
     }
     .boton-agregar {
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    z-index: 10;
-    position: relative;
-}
-.producto {
-    pointer-events: auto;
-}
-.carousel {
-    pointer-events: auto;
-}
-.carousel-slides {
-    pointer-events: auto;
-}
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        z-index: 10;
+        position: relative;
+    }
+    .producto {
+        pointer-events: auto;
+    }
+    .carousel {
+        pointer-events: auto;
+    }
+    .carousel-slides {
+        pointer-events: auto;
+    }
     .producto {
         width: 300px;
         box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
@@ -452,47 +467,43 @@
     }
     /* Estilos para la notificación personalizada */
     #custom-notification {
-    max-width: 250px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    position: fixed;
-    top: 80px;
-    right: 10px;
-    background-color: #28a745;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    font-size: 0.9rem;
-}
-
-#custom-notification.show {
-    opacity: 1;
-}
-
-#custom-notification svg {
-    width: 20px;
-    height: 20px;
-    stroke-width: 2;
-}
-
-@media (max-width: 640px) {
-    #custom-notification {
-        max-width: 180px;
-        padding: 6px 10px;
-        top: 100px; /* Más abajo en móvil */
-        font-size: 0.75rem;
+        max-width: 250px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        position: fixed;
+        top: 80px;
+        right: 10px;
+        background-color: #28a745;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 0.9rem;
     }
-
+    #custom-notification.show {
+        opacity: 1;
+    }
     #custom-notification svg {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
+        stroke-width: 2;
     }
-}
+    @media (max-width: 640px) {
+        #custom-notification {
+            max-width: 180px;
+            padding: 6px 10px;
+            top: 100px;
+            font-size: 0.75rem;
+        }
+        #custom-notification svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
     /* Estilos para el contador del carrito */
     #cart-count {
         display: none;
@@ -592,7 +603,7 @@
         right: 20px;
         border-radius: 12px;
         padding: 8px 14px;
-        background: rgba(255, 255, 255, 1);
+        background: rgba(242, 242, 242, 1);
         box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05), 0px 4px 6px rgba(0, 0, 0, 0.06);
         display: flex;
         justify-content: center;
@@ -603,727 +614,704 @@
         letter-spacing: 0px;
         color: rgba(36, 36, 36, 1);
         transition: all 0.3s;
-        font-family: ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         z-index: 9999;
-      }
-  
-      .Tienda-Sport:hover {
+    }
+    .Tienda-Sport:hover {
         background: rgba(34, 139, 34, 1);
-      }
-  
-      .Tienda-Sport {
-        background: rgba(242, 242, 242, 1);
-        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
-      }
-  
-      .Tienda-Sport img {
+    }
+    .Tienda-Sport img {
         width: 30px;
         height: 30px;
         pointer-events: none;
-      }
-  
-      #root {
+    }
+    #root {
         height: 120vh;
-      }
-      
-footer .social-icon {
-  fill: #ffffff !important; /* Blanco puro */
-}
-
-/* Mantener blanco en hover */
-footer a:hover .social-icon {
-  fill: #ffffff !important; /* Blanco en hover */
-}
-
-/* Tamaño y visibilidad en móvil */
-@media (max-width: 640px) {
-  footer .TEXT-LINK {
-    font-size: 0.9rem;
-  }
-  footer .DESC {
-    font-size: 0.75rem;
-  }
-  footer ._icon-wrapper_1a3wa_1 {
-    font-size: 1.25rem; /* text-xl (20px) en móvil */
-  }
-  footer .inline-flex {
-    width: 2.5rem; /* 40px en móvil */
-    height: 2.5rem;
-  }
-}
+    }
+    footer .social-icon {
+        fill: #ffffff !important;
+    }
+    footer a:hover .social-icon {
+        fill: #ffffff !important;
+    }
+    @media (max-width: 640px) {
+        footer .TEXT-LINK {
+            font-size: 0.9rem;
+        }
+        footer .DESC {
+            font-size: 0.75rem;
+        }
+        footer ._icon-wrapper_1a3wa_1 {
+            font-size: 1.25rem;
+        }
+        footer .inline-flex {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
 </style>
-  <script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white dark:bg-gray-900">
-  
-  <header class="menu-fixed bg-gray-100/90 dark:bg-gray-800/90 shadow-md rounded-b-2xl">
-    <div class="w-full h-full flex items-center justify-between px-4" style="padding-top: 12px; padding-bottom: 12px;">
-      <div class="flex items-center">
-        <img class="_image_bh1ht_4 !w-auto object-cover" alt="Logo de Sport Elite Línea Deportiva" src="img/image.png" style="height: 50px; background-color: transparent;">
-        <div class="brand-name">Sport Elite Pro <span>.</span></div>
-      </div>
-      <div class="flex items-center gap-4">
-        <form class="relative flex items-center" id="search-form">
-          <input type="text" placeholder="Buscar productos..." class="w-48 sm:w-64 px-4 py-2 text-sm text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500" id="search-input">
-          <button type="submit" class="absolute right-2 p-1 text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+  <main>
+    <header class="menu-fixed bg-gray-100/90 dark:bg-gray-800/90 shadow-md rounded-b-2xl">
+      <div class="w-full h-full flex items-center justify-between px-4" style="padding-top: 12px; padding-bottom: 12px;">
+        <div class="flex items-center">
+          <img class="_image_bh1ht_4 !w-auto object-cover" alt="Logo de Sport Elite Línea Deportiva" src="img/image.png" style="height: 50px; background-color: transparent;">
+          <div class="brand-name">Sport Elite Pro <span>.</span></div>
+        </div>
+        <div class="flex items-center gap-4">
+          <form class="relative flex items-center" id="search-form">
+            <input type="text" placeholder="Buscar productos..." class="w-48 sm:w-64 px-4 py-2 text-sm text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500" id="search-input">
+            <button type="submit" class="absolute right-2 p-1 text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+          </form>
+          <div class="categories-container">
+            <button class="categories-btn">
+              <span>Categorías</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="categories-dropdown">
+              <a href="#zapatillas" class="category-item">Zapatillas</a>
+              <a href="#uniformes" class="category-item">Uniformes</a>
+              <a href="#accesorios" class="category-item">Accesorios</a>
+              <a href="#equipamiento" class="category-item">Equipamiento</a>
+            </div>
+          </div>
+          <button class="text-black dark:text-white hover:text-orange-500 dark:hover:text-orange-400 relative" id="cart-button">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+          </button>
+          <button class="text-black" id="menu-toggle">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
           </button>
-        </form>
-
-        <div class="categories-container">
-          <button class="categories-btn">
-            <span>Categorías</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-          <div class="categories-dropdown">
-            <a href="#zapatillas" class="category-item">Zapatillas</a>
-            <a href="#uniformes" class="category-item">Uniformes</a>
-            <a href="#accesorios" class="category-item">Accesorios</a>
-            <a href="#equipamiento" class="category-item">Equipamiento</a>
+        </div>
+        <div class="hidden flex-col items-center justify-center gap-5 w-full" id="menu-content">
+          <nav class="w-full flex flex-col items-center justify-center gap-4 text-[16px]">
+            <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+              <a href="index.html">Inicio</a>
+            </button>
+            <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+              <a href="productos.html">Productos</a>
+            </button>
+            <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+              <a href="Sobrenosotros.html">Sobre Nosotros</a>
+            </button>
+          </nav>
+          <div class="w-full flex flex-col items-center justify-end gap-3 pb-4">
+            <a href="Sobrenosotros.html#unase-a-nosotros" class="BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] whitespace-nowrap font-normal text-black hover:text-gray-700 dark:text-black dark:hover:text-gray-700 flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
+              <div class="_editable_jwu41_1 overflow-hidden text-ellipsis">Únase a nosotros</div>
+              <div class="_icon-wrapper_1a3wa_1 text-sm text-black hover:text-gray-700 dark:text-black dark:hover:text-gray-700 group-hover:translate-x-1 transition-all">
+                <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+              </div>
+            </a>
+            <a href="Sobrenosotros.html#contactanos" class="BTN-PRIMARY max-w-[200px] w-full px-6 group text-[16px] whitespace-nowrap font-normal flex gap-2 items-center justify-center rounded-full bg-orange-500 hover:bg-orange-600 hover:transition-all hover:duration-300 text-white" style="height: 48px;">
+              <div class="overflow-hidden text-ellipsis">Contáctenos</div>
+              <div class="text-sm group-hover:translate-x-1 transition-all">
+                <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+              </div>
+            </a>
           </div>
         </div>
-
-        <button class="text-black dark:text-white hover:text-orange-500 dark:hover:text-orange-400 relative" id="cart-button">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-          </svg>
-          <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
-        </button>
-        <button class="text-black" id="menu-toggle">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
       </div>
-      <div class="hidden flex-col items-center justify-center gap-5 w-full" id="menu-content">
-        <nav class="w-full flex flex-col items-center justify-center gap-4 text-[16px]">
-          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
-            <a href="index.html">Inicio</a>
-          </button>
-          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
-            <a href="productos.html">Productos</a>
-          </button>
-          <button class="py-4 text-black hover:text-gray-700 whitespace-nowrap cursor-pointer hover:scale-105 transition-all duration-50 dark:text-black dark:hover:text-gray-700 BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] font-normal flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
-            <a href="Sobrenosotros.html">Sobre Nosotros</a>
-          </button>
-        </nav>
-        <div class="w-full flex flex-col items-center justify-end gap-3 pb-4">
-          <a href="Sobrenosotros.html#unase-a-nosotros" class="BTN-SECONDARY max-w-[200px] w-full px-6 group text-[16px] whitespace-nowrap font-normal text-black hover:text-gray-700 dark:text-black dark:hover:text-gray-700 flex gap-2 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:transition-all hover:duration-300" style="height: 48px;">
-            <div class="_editable_jwu41_1 overflow-hidden text-ellipsis">Únase a nosotros</div>
-            <div class="_icon-wrapper_1a3wa_1 text-sm text-black hover:text-gray-700 dark:text-black dark:hover:text-gray-700 group-hover:translate-x-1 transition-all">
-              <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
-            </div>
-          </a>
-          <a href="Sobrenosotros.html#contactanos" class="BTN-PRIMARY max-w-[200px] w-full px-6 group text-[16px] whitespace-nowrap font-normal flex gap-2 items-center justify-center rounded-full bg-orange-500 hover:bg-orange-600 hover:transition-all hover:duration-300 text-white" style="height: 48px;">
-            <div class="overflow-hidden text-ellipsis">Contáctenos</div>
-            <div class="text-sm group-hover:translate-x-1 transition-all">
-              <svg class="svg-inline--fa fa-arrow-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
-            </div>
-          </a>
+    </header>
+
+    <!-- Modal del Carrito -->
+    <div class="cart-modal" id="cart-modal">
+      <div class="cart-modal-content">
+        <button class="close-btn" id="close-cart">X</button>
+        <h3>Carrito de Compras</h3>
+        <ul id="cart-items"></ul>
+        <p class="total" id="cart-total">Total: $0.00</p>
+        <button class="buy-btn" id="buy-button">Comprar</button>
+      </div>
+    </div>
+
+    <!-- Modal de Confirmación de Compra -->
+    <div class="cart-modal" id="confirm-modal">
+      <div class="cart-modal-content">
+        <button class="close-btn" id="close-confirm">X</button>
+        <h3>Confirmar Pedido</h3>
+        <p id="confirm-details">Aquí se mostrarán los detalles del pedido.</p>
+        <div class="flex flex-col gap-4 mt-4">
+          <button class="buy-btn" id="send-email">Enviar por Correo</button>
+          <button class="buy-btn bg-green-600 hover:bg-green-700" id="send-whatsapp">Enviar por WhatsApp</button>
+          <button class="buy-btn bg-gray-500 hover:bg-gray-600" id="cancel-confirm">Cancelar</button>
         </div>
       </div>
     </div>
-  </header>
 
-  <!-- Modal del Carrito -->
-  <div class="cart-modal" id="cart-modal">
-    <div class="cart-modal-content">
-      <button class="close-btn" id="close-cart">X</button>
-      <h3>Carrito de Compras</h3>
-      <ul id="cart-items"></ul>
-      <p class="total" id="cart-total">Total: $0.00</p>
-      <button class="buy-btn" id="buy-button">Comprar</button>
-    </div>
-  </div>
-
-  <!-- Modal de Confirmación de Compra -->
-  <div class="cart-modal" id="confirm-modal">
-    <div class="cart-modal-content">
-      <button class="close-btn" id="close-confirm">X</button>
-      <h3>Confirmar Pedido</h3>
-      <p id="confirm-details">Aquí se mostrarán los detalles del pedido.</p>
-      <div class="flex flex-col gap-4 mt-4">
-        <button class="buy-btn" id="send-email">Enviar por Correo</button>
-        <button class="buy-btn bg-green-600 hover:bg-green-700" id="send-whatsapp">Enviar por WhatsApp</button>
-        <button class="buy-btn bg-gray-500 hover:bg-gray-600" id="cancel-confirm">Cancelar</button>
+    <section class="banner">
+      <div class="slides" id="slides">
+        <a href="zapatillas-elite-speed.html" class="slide" style="background-image: url('img/f7.jpg');">
+          <div class="slide-content">
+            <h3>Entrena como Profesional</h3>
+            <p>Zapatillas Elite Speed - Máximo rendimiento en cada paso.</p>
+          </div>
+        </a>
+        <a href="uniforme-pro.html" class="slide" style="background-image: url('img/f8.jpg');">
+          <div class="slide-content">
+            <h3>Domina la Cancha</h3>
+            <p>Uniformes Pro - Diseñados para la victoria.</p>
+          </div>
+        </a>
+        <a href="mochila-titan.html" class="slide" style="background-image: url('https://images.unsplash.com/photo-1593079831268-3381b0db4a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+          <div class="slide-content">
+            <h3>Energía sin Límites</h3>
+            <p>Mochila Titan - Lleva tu pasión a todas partes.</p>
+          </div>
+        </a>
       </div>
-    </div>
-  </div>
+      <button class="arrow arrow-left" id="prev">❮</button>
+      <button class="arrow arrow-right" id="next">❯</button>
+    </section>
 
-  <section class="banner">
-    <div class="slides" id="slides">
-      <a href="zapatillas-elite-speed.html" class="slide" style="background-image: url('img/f7.jpg');">
-        <div class="slide-content">
-          <h3>Entrena como Profesional</h3>
-          <p>Zapatillas Elite Speed - Máximo rendimiento en cada paso.</p>
+    <!-- Sección para resultados de búsqueda -->
+    <section id="search-results">
+      <h2>Resultados de Búsqueda</h2>
+      <div class="contenedor" id="search-results-container"></div>
+    </section>
+
+    <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden" id="uniformes-section">
+      <div class="mx-auto max-w-7xl px-1 lg:px-2">
+        <div class="mx-auto max-w-2xl text-center mb-12">
+          <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
+            Uniformes deportivos
+          </h2>
+          <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
+            Donde la pasión por el deporte vive. Descubre nuestra línea deportiva premium.
+          </p>
         </div>
+        <section id="uniformes-section">
+          <div class="carousel-wrapper">
+            <div class="carousel" id="uniformes-carousel">
+              <div class="carousel-slides" id="uniformes-slides">
+                <div class="producto" data-nombre="Uniforme Francia">
+                  <a href="Francia.html" class="product-link">
+                    <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/c14a3125-b2c8-4b68-89ba-b47ed701274d.jpeg?format=webp" alt="Zapatillas Elite Speed">
+                    <div class="contenido">
+                      <p>Uniforme francia </p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Francia" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="camiseta Colombia">
+                  <a href="colombia.html" class="product-link">
+                    <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" alt="Camiseta ProDry">
+                    <div class="contenido">
+                      <p>Camiseta Colombia</p>
+                      <p class="precio">$40.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Camiseta Colombia" data-price="40.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Uniforme Alemania">
+                  <a href="Alemania.html" class="product-link">
+                    <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Uniforme Alemania">
+                    <div class="contenido">
+                      <p>Uniforme Alemania</p>
+                      <p class="precio">$30.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Alemania" data-price="30.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme Portugal">
+                  <a href="Portugal.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme Portugal">
+                    <div class="contenido">
+                      <p>Uniforme Portugal</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Portugal" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme Italia">
+                  <a href="italia.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme Italia">
+                    <div class="contenido">
+                      <p>Uniforme Italia</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Italia" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme Brasil">
+                  <a href="Brasil.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme Brasil">
+                    <div class="contenido">
+                      <p>Uniforme Brasil</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Brasil" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme Argentina">
+                  <a href="Argentina.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme Argentina">
+                    <div class="contenido">
+                      <p>Uniforme Argentina</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Argentina" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Camisa Colombia 100 Años">
+                  <a href="Colombia100.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Camisa Colombia 100 Años">
+                    <div class="contenido">
+                      <p>Camisa colombia 100 Años</p>
+                      <p class="precio">$40.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Camisa Colombia 100 Años" data-price="40.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme Estados Unidos">
+                  <a href="Estados-Unidos.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme Estados Unidos">
+                    <div class="contenido">
+                      <p>Uniforme Estados Unidos</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Estados Unidos" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-arrow-left" id="uniformes-prev">❮</button>
+            <button class="carousel-arrow carousel-arrow-right" id="uniformes-next">❯</button>
+          </div>
+        </div>
+      </section>
+      <section id="clubes-section">
+        <div class="mx-auto max-w-7xl px-1 lg:px-2">
+          <div class="mx-auto max-w-2xl text-center mb-12">
+            <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
+              Uniformes de Clubes 
+            </h2>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel" id="clubes-carousel">
+              <div class="carousel-slides" id="clubes-slides">
+                <div class="producto" data-nombre="Uniforme liverpool">
+                  <a href="liverpool.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme liverpool">
+                    <div class="contenido">
+                      <p>Uniforme liverpool</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme liverpool" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme Barcelona">
+                  <a href="Barcelona.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme Barcelona">
+                    <div class="contenido">
+                      <p>Uniforme Barcelona</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Barcelona" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 обус24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme Real Madrid">
+                  <a href="Real-Madrid.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme Real Madrid">
+                    <div class="contenido">
+                      <p>Uniforme Real Madrid</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Real Madrid" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme Manchester City">
+                  <a href="Manchester-City.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme Manchester City">
+                    <div class="contenido">
+                      <p>Uniforme Manchester City</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme Manchester City" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="uniforme PSG">
+                  <a href="psg.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Uniforme PSG">
+                    <div class="contenido">
+                      <p>Uniforme PSG</p>
+                      <p class="precio">$30.000</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Uniforme PSG" data-price="30.000">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-arrow-left" id="clubes-prev">❮</button>
+            <button class="carousel-arrow carousel-arrow-right" id="clubes-next">❯</button>
+          </div>
+        </div>
+      </section>
+      <section id="zapatillas-section">
+        <div class="mx-auto max-w-7xl px-1 lg:px-2">
+          <div class="mx-auto max-w-2xl text-center mb-12">
+            <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
+              Zapatillas
+            </h2>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel" id="zapatillas-carousel">
+              <div class="carousel-slides" id="zapatillas-slides">
+                <div class="producto" data-nombre="Zapatilla pro">
+                  <a href="Zapatillag.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Zapatilla Pro">
+                    <div class="contenido">
+                      <p>Zapatilla Pro</p>
+                      <p class="precio">$60.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Zapatilla Pro" data-price="60.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Zapatilla elite">
+                  <a href="Zapatilla.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
+                    <div class="contenido">
+                      <p>Zapatilla Elite</p>
+                      <p class="precio">$70.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Zapatilla elite">
+                  <a href="Zapatilla.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
+                    <div class="contenido">
+                      <p>Zapatilla Elite</p>
+                      <p class="precio">$70.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Zapatilla elite">
+                  <a href="Zapatilla.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
+                    <div class="contenido">
+                      <p>Zapatilla Elite</p>
+                      <p class="precio">$70.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Zapatilla clásico">
+                  <a href="Zapatilla-clasico.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Zapatilla Clásico">
+                    <div class="contenido">
+                      <p>Zapatilla Clásico</p>
+                      <p class="precio">$45.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Zapatilla Clásico" data-price="45.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-arrow-left" id="zapatillas-prev">❮</button>
+            <button class="carousel-arrow carousel-arrow-right" id="zapatillas-next">❯</button>
+          </div>
+        </div>
+      </section>
+      <section id="accesorios-section">
+        <div class="mx-auto max-w-7xl px-1 lg:px-2">
+          <div class="mx-auto max-w-2xl text-center mb-12">
+            <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
+              Accesorios 
+            </h2>
+          </div>
+          <div class="carousel-wrapper">
+            <div class="carousel" id="accesorios-carousel">
+              <div class="carousel-slides" id="accesorios-slides">
+                <div class="producto" data-nombre="Equipo pro">
+                  <a href="Equipo-pro.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Equipo Pro">
+                    <div class="contenido">
+                      <p>Equipo Pro</p>
+                      <p class="precio">$60.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Equipo Pro" data-price="60.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Equipo elite">
+                  <a href="Equipo-elite.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Equipo Elite">
+                    <div class="contenido">
+                      <p>Equipo Elite</p>
+                      <p class="precio">$70.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Equipo Elite" data-price="70.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Equipo Sport">
+                  <a href="Equipo-Sport.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Equipo Sport">
+                    <div class="contenido">
+                      <p>Equipo Sport</p>
+                      <p class="precio">$70.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Equipo Sport" data-price="70.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Equipo lop">
+                  <a href="Equipo-lop.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Equipo lop">
+                    <div class="contenido">
+                      <p>Equipo lop</p>
+                      <p class="precio">$70.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Equipo lop" data-price="70.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Equipo Cal">
+                  <a href="Equipo-Cal.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Equipo Cal">
+                    <div class="contenido">
+                      <p>Equipo Cal</p>
+                      <p class="precio">$70.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="UEquipo Cal" data-price="70.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="producto" data-nombre="Equipo clásico">
+                  <a href="Equipo-clasico.html" class="product-link">
+                    <img src="https://via.placeholder.com/150" alt="Equipo Clásico">
+                    <div class="contenido">
+                      <p>Equipo Clásico</p>
+                      <p class="precio">$45.00</p>
+                    </div>
+                  </a>
+                  <button class="boton-agregar" data-name="Equipo Clásico" data-price="45.00">
+                    Agregar
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-arrow-left" id="accesorios-prev">❮</button>
+            <button class="carousel-arrow carousel-arrow-right" id="accesorios-next">❯</button>
+          </div>
+        </div>
+      </section>
+      <link rel="stylesheet" href="https://use.typekit.net/your-kit-id.css">
+
+      <script type="module" src="https://wa.link/eej87k"></script>
+
+      <!-- badge start-->
+      <a class="Tienda-Sport" id="TiendaSport" href="https://wa.link/eej87k" target="_blank">
+        <img src="c:\Users\yilbr\Downloads\whatsapp.png" alt="Whatsap-badge">
+        Whatsapp
       </a>
-      <a href="uniforme-pro.html" class="slide" style="background-image: url('img/f8.jpg');">
-        <div class="slide-content">
-          <h3>Domina la Cancha</h3>
-          <p>Uniformes Pro - Diseñados para la victoria.</p>
-        </div>
-      </a>
-      <a href="mochila-titan.html" class="slide" style="background-image: url('https://images.unsplash.com/photo-1593079831268-3381b0db4a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
-        <div class="slide-content">
-          <h3>Energía sin Límites</h3>
-          <p>Mochila Titan - Lleva tu pasión a todas partes.</p>
-        </div>
-      </a>
-    </div>
-    <button class="arrow arrow-left" id="prev">❮</button>
-    <button class="arrow arrow-right" id="next">❯</button>
-  </section>
 
-  <!-- Sección para resultados de búsqueda -->
-  <section id="search-results">
-    <h2>Resultados de Búsqueda</h2>
-    <div class="contenedor" id="search-results-container"></div>
-  </section>
-
-  <section class="relative py-8 sm:py-12 bg-white dark:bg-gray-900 overflow-hidden" id="uniformes-section">
-    <div class="mx-auto max-w-7xl px-1 lg:px-2">
-      <div class="mx-auto max-w-2xl text-center mb-12">
-        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
-          Uniformes deportivos
-        </h2>
-        <p class="mt-4 text-xl leading-9 text-gray-700 dark:text-white/90">
-          Donde la pasión por el deporte vive. Descubre nuestra línea deportiva premium.
-        </p>
+      <!-- Notificación personalizada -->
+      <div id="custom-notification" class="fixed top-10 right-10 bg-green-600 text-white p-2 rounded-lg shadow-lg flex items-center opacity-0 transition-opacity duration-500 z-50">
+        <span id="notification-message"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
       </div>
-      <section id="uniformes-section">
-        <div class="carousel-wrapper">
-          <div class="carousel" id="uniformes-carousel">
-            <div class="carousel-slides" id="uniformes-slides">
-            <div class="producto" data-nombre="Uniforme Francia">
-              <a href="Francia.html" class="product-link">
-                <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/c14a3125-b2c8-4b68-89ba-b47ed701274d.jpeg?format=webp" alt="Zapatillas Elite Speed">
-                <div class="contenido">
-                  <p>Uniforme francia </p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Francia" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="camiseta Colombia">
-              <a href="colombia.html" class="product-link">
-                <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/b9b1c3f1-f68d-421b-b5a4-95dcc8ea6252.jpeg?format=webp" alt="Camiseta ProDry">
-                <div class="contenido">
-                  <p>Camiseta Colombia</p>
-                  <p class="precio">$40.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Camiseta Colombia" data-price="40.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="Uniforme Alemania">
-              <a href="Alemania.html" class="product-link">
-                <img src="https://cdn.a1.art/assets/images/app_1811317900177637378/1811317900181831681/9d968de6-ee00-485e-ac46-7225609af4fb.jpeg?format=webp" alt="Uniforme Alemania">
-                <div class="contenido">
-                  <p>Uniforme Alemania</p>
-                  <p class="precio">$30.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Alemania" data-price="30.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme Portugal">
-              <a href="Portugal.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Portugal">
-                <div class="contenido">
-                  <p>Uniforme Portugal</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Portugal" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme Italia">
-              <a href="italia.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Italia">
-                <div class="contenido">
-                  <p>Uniforme Italia</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Italia" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme Brasil">
-              <a href="Brasil.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Brasil">
-                <div class="contenido">
-                  <p>Uniforme Brasil</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Brasil" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme Argentina">
-              <a href="Argentina.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Argentina">
-                <div class="contenido">
-                  <p>Uniforme Argentina</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Argentina" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="Camisa Colombia 100 Años">
-              <a href="Colombia100.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Camisa Colombia 100 Años">
-                <div class="contenido">
-                  <p>Camisa colombia 100 Años</p>
-                  <p class="precio">$40.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Camisa Colombia 100 Años" data-price="40.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme Estados Unidos">
-              <a href="Estados-Unidos.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Estados Unidos">
-                <div class="contenido">
-                  <p>Uniforme Estados Unidos</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Estados Unidos" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-arrow carousel-arrow-left" id="uniformes-prev">❮</button>
-    <button class="carousel-arrow carousel-arrow-right" id="uniformes-next">❯</button>
-      </div>
-    </div>
-  </section>
-  <section id="clubes-section">
-    <div class="mx-auto max-w-7xl px-1 lg:px-2">
-      <div class="mx-auto max-w-2xl text-center mb-12">
-        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
-          Uniformes de Clubes 
-        </h2>
-      </div>
-      <div class="carousel-wrapper">
-        <div class="carousel" id="clubes-carousel">
-          <div class="carousel-slides" id="clubes-slides">
+    </main>
 
-            <div class="producto" data-nombre="Uniforme liverpool">
-              <a href="liverpool.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme liverpool">
-                <div class="contenido">
-                  <p>Uniforme liverpool</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme liverpool" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme Barcelona">
-              <a href="Barcelona.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Barcelona">
-                <div class="contenido">
-                  <p>Uniforme Barcelona</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Barcelona" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="uniforme Real Madrid">
-              <a href="Real-Madrid.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Real Madrid">
-                <div class="contenido">
-                  <p>Uniforme Real Madrid</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Real Madrid" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-            <div class="producto" data-nombre="uniforme Manchester City">
-              <a href="Manchester-City.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme Manchester City">
-                <div class="contenido">
-                  <p>Uniforme Manchester City</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme Manchester City" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-            <div class="producto" data-nombre="uniforme PSG">
-              <a href="psg.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Uniforme PSG">
-                <div class="contenido">
-                  <p>Uniforme PSG</p>
-                  <p class="precio">$30.000</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Uniforme PSG" data-price="30.000">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-arrow carousel-arrow-left" id="clubes-prev">❮</button>
-        <button class="carousel-arrow carousel-arrow-right" id="clubes-next">❯</button>
-      </div>
-    </div>
-  </section>
-
-  
-  <section id="zapatillas-section">
-    <div class="mx-auto max-w-7xl px-1 lg:px-2">
-      <div class="mx-auto max-w-2xl text-center mb-12">
-        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
-          Zapatillas
-        </h2>
-      </div>
-      <div class="carousel-wrapper">
-        <div class="carousel" id="zapatillas-carousel">
-          <div class="carousel-slides" id="zapatillas-slides">
-
-
-            <div class="producto" data-nombre="Zapatilla pro">
-              <a href="Zapatillag.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Zapatilla Pro">
-                <div class="contenido">
-                  <p>Zapatilla Pro</p>
-                  <p class="precio">$60.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Zapatilla Pro" data-price="60.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="Zapatilla elite">
-              <a href="Zapatilla.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
-                <div class="contenido">
-                  <p>Zapatilla Elite</p>
-                  <p class="precio">$70.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-
-            <div class="producto" data-nombre="Zapatilla elite">
-              <a href="Zapatilla.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
-                <div class="contenido">
-                  <p>Zapatilla Elite</p>
-                  <p class="precio">$70.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-            <div class="producto" data-nombre="Zapatilla elite">
-              <a href="Zapatilla.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Zapatilla Elite">
-                <div class="contenido">
-                  <p>Zapatilla Elite</p>
-                  <p class="precio">$70.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Zapatilla Elite" data-price="70.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-
-            <div class="producto" data-nombre="Zapatilla clásico">
-              <a href="Zapatilla-clasico.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Zapatilla Clásico">
-                <div class="contenido">
-                  <p>Zapatilla Clásico</p>
-                  <p class="precio">$45.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Zapatilla Clásico" data-price="45.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-arrow carousel-arrow-left" id="zapatillas-prev">❮</button>
-      <button class="carousel-arrow carousel-arrow-right" id="zapatillas-next">❯</button>
-      </div>
-    </div>
-  </section>
-  <section id="accesorios-section">
-    <div class="mx-auto max-w-7xl px-1 lg:px-2">
-      <div class="mx-auto max-w-2xl text-center mb-12">
-        <h2 class="text-4xl font-bold tracking-tight text-black-600 dark:text-orange-400 sm:text-5xl">
-          Accesorios 
-        </h2>
-      </div>
-      <div class="carousel-wrapper">
-        <div class="carousel" id="accesorios-carousel">
-          <div class="carousel-slides" id="accesorios-slides">
-
-            <div class="producto" data-nombre="Equipo pro">
-              <a href="Equipo-pro.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Equipo Pro">
-                <div class="contenido">
-                  <p>Equipo Pro</p>
-                  <p class="precio">$60.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Equipo Pro" data-price="60.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-
-            
-            <div class="producto" data-nombre="Equipo elite">
-              <a href="Equipo-elite.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Equipo Elite">
-                <div class="contenido">
-                  <p>Equipo Elite</p>
-                  <p class="precio">$70.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Equipo Elite" data-price="70.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="producto" data-nombre="Equipo Sport">
-              <a href="Equipo-Sport.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Equipo Sport">
-                <div class="contenido">
-                  <p>Equipo Sport</p>
-                  <p class="precio">$70.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Equipo Sport" data-price="70.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-            <div class="producto" data-nombre="Equipo lop">
-              <a href="Equipo-lop.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Equipo lop">
-                <div class="contenido">
-                  <p>Equipo lop</p>
-                  <p class="precio">$70.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Equipo lop" data-price="70.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-            <div class="producto" data-nombre="Equipo Cal">
-              <a href="Equipo-Cal.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Equipo Cal">
-                <div class="contenido">
-                  <p>Equipo Cal</p>
-                  <p class="precio">$70.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="UEquipo Cal" data-price="70.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-
-            <div class="producto" data-nombre="Equipo clásico">
-              <a href="Equipo-clasico.html" class="product-link">
-                <img src="https://via.placeholder.com/150" alt="Equipo Clásico">
-                <div class="contenido">
-                  <p>Equipo Clásico</p>
-                  <p class="precio">$45.00</p>
-                </div>
-              </a>
-              <button class="boton-agregar" data-name="Equipo Clásico" data-price="45.00">
-                Agregar
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-arrow carousel-arrow-left" id="accesorios-prev">❮</button>
-      <button class="carousel-arrow carousel-arrow-right" id="accesorios-next">❯</button>
-      </div>
-    </div>
-  </section>
-
-
-
-  <footer class="py-10 bg-gray-900 dark:bg-gray-700">
-  <div style="opacity: 1; transform: none;">
-    <div class="px-4 mx-auto max-w-7xl py-10 flex flex-col items-center gap-16">
-      <ul class="w-full grid grid-cols-2 text-center gap-6 md:grid-cols-5">
-        <li>
-          <a href="Sobrenosotros.html" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
-            <div class="_editable_jwu41_1">Sobre Nosotros</div>
-          </a>
-        </li>
-        <li>
-          <a href="productos.html" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
-            <div class="_editable_jwu41_1">Nuestros Productos</div>
-          </a>
-        </li>
-        <li>
-          <a href="index.html" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
-            <div class="_editable_jwu41_1">Inicio</div>
-          </a>
-        </li>
-        <li>
-          <a href="Sobrenosotros.html#contactanos" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
-            <div class="_editable_jwu41_1">Contáctanos</div>
-          </a>
-        </li>
-        <li>
-          <a href="index.html#blog" class="TEXT-LINK inline-flex text-lg font-medium text-white dark:text-white hover:text-gray-300 focus:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400">
-            <div class="_editable_jwu41_1">Blog y Noticias</div>
-          </a>
-        </li>
-      </ul>
-      <div class="flex flex-col gap-6">
-        <ul class="flex items-center justify-center gap-6">
+    <footer class="py-10 bg-gray-900 dark:bg-gray-700">
+      <div class="px-4 mx-auto max-w-7xl flex flex-col items-center gap-10">
+        <!-- Navegación del footer -->
+        <ul class="w-full grid grid-cols-2 gap-6 text-left sm:grid-cols-3 md:grid-cols-5">
           <li>
-            <a href="https://facebook.com/SportELite" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-300 transition-all duration-200 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:bg-gray-600">
-              <img src="img/facebook.png" alt="Facebook" class="w-6 h-6">
+            <a href="index.html" class="text-lg font-medium text-white hover:text-gray-300 dark:hover:text-gray-300 transition-colors duration-200">
+              Inicio
             </a>
           </li>
           <li>
-            <a href="https://instagram.com/SportElite" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-300 transition-all duration-200 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:bg-gray-600">
-              <img src="img/insta.png" alt="Instagram" class="w-6 h-6">
+            <a href="productos.html" class="text-lg font-medium text-white hover:text-gray-300 dark:hover:text-gray-300 transition-colors duration-200">
+              Productos
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/SportElite" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-300 transition-all duration-200 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:bg-gray-600">
-              <img src="img/x.png" alt="X" class="w-6 h-6">
+            <a href="Sobrenosotros.html" class="text-lg font-medium text-white hover:text-gray-300 dark:hover:text-gray-300 transition-colors duration-200">
+              Sobre Nosotros
             </a>
           </li>
           <li>
-            <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center justify-center w-12 h-12 bg-gray-300 transition-all duration-200 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 dark:bg-gray-300 dark:hover:bg-gray-500 dark:focus:bg-gray-600">
-              <img src="img/whatsapp.png" alt="WhatsApp" class="w-6 h-6">
+            <a href="Sobrenosotros.html#contactanos" class="text-lg font-medium text-white hover:text-gray-300 dark:hover:text-gray-300 transition-colors duration-200">
+              Contáctanos
+            </a>
+          </li>
+          <li>
+            <a href="index.html#blog" class="text-lg font-medium text-white hover:text-gray-300 dark:hover:text-gray-300 transition-colors duration-200">
+              Blog y Noticias
             </a>
           </li>
         </ul>
-        <p class="DESC text-base font-normal text-center text-white dark:text-white">
-          <div class="_editable_jwu41_1">© 2025 Sport Elite. Todos los derechos reservados.</div>
-        </p>
+    
+        <!-- Redes sociales y copyright -->
+        <div class="flex flex-col items-center gap-6">
+          <ul class="flex items-center justify-center gap-4">
+            <li>
+              <a href="https://facebook.com/SportELite" target="_blank" class="inline-flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 transition-all duration-200">
+                <img src="img/facebook.png" alt="Facebook" class="w-5 h-5">
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com/SportElite" target="_blank" class="inline-flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 transition-all duration-200">
+                <img src="img/insta.png" alt="Instagram" class="w-5 h-5">
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/SportElite" target="_blank" class="inline-flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 transition-all duration-200">
+                <img src="img/x.png" alt="X" class="w-5 h-5">
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full hover:bg-gray-500 focus:outline-none focus:bg-gray-600 transition-all duration-200">
+                <img src="img/whatsapp.png" alt="WhatsApp" class="w-5 h-5">
+              </a>
+            </li>
+          </ul>
+          <p class="text-base font-normal text-white text-center">
+            © 2025 Sport Elite. Todos los derechos reservados.
+          </p>
+        </div>
       </div>
-    </div>
-  </div>
-</footer>
+    </footer>
 
 
- <!-- Notificación personalizada -->
-<div id="custom-notification" class="fixed top-10 right-10 bg-green-600 text-white p-2 rounded-lg shadow-lg flex items-center opacity-0 transition-opacity duration-500 z-50">
-  <span id="notification-message"></span>
-  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-  </svg>
-</div>
-  
+ 
 
 <script>
   // Control del scroll
@@ -1567,140 +1555,134 @@ footer a:hover .social-icon {
       autoSlide = setInterval(() => showSlide(currentSlide + 1), 5000);
   });
 
-  // Carrusel de Uniformes Deportivos
+  // Carrusel
   function initializeCarousel(carouselId, slidesId, prevId, nextId) {
-    const carousel = document.getElementById(carouselId);
-    const slides = document.getElementById(slidesId);
-    const productos = slides.querySelectorAll('.producto');
-    const totalProductos = productos.length;
-    const stepDesktop = 310;
-    const stepMobile = 210;
-    let currentPosition = 0;
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0; // Nueva variable para el eje Y
-    let movedDistanceX = 0;
-    let movedDistanceY = 0; // Nueva variable para el eje Y
-    let moved = false; // Bandera para rastrear movimiento significativo
+      const carousel = document.getElementById(carouselId);
+      const slides = document.getElementById(slidesId);
+      const productos = slides.querySelectorAll('.producto');
+      const totalProductos = productos.length;
+      const stepDesktop = 310;
+      const stepMobile = 210;
+      let currentPosition = 0;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let movedDistanceX = 0;
+      let movedDistanceY = 0;
+      let moved = false;
 
-    productos.forEach(producto => {
-        const clone = producto.cloneNode(true);
-        slides.appendChild(clone);
-    });
+      productos.forEach(producto => {
+          const clone = producto.cloneNode(true);
+          slides.appendChild(clone);
+      });
 
-    function updateStep() {
-        return window.innerWidth <= 640 ? stepMobile : stepDesktop;
-    }
+      function updateStep() {
+          return window.innerWidth <= 640 ? stepMobile : stepDesktop;
+      }
 
-    function updateTotalWidth() {
-        return totalProductos * updateStep();
-    }
+      function updateTotalWidth() {
+          return totalProductos * updateStep();
+      }
 
-    function moveCarousel(direction) {
-        const step = updateStep();
-        const totalWidth = updateTotalWidth();
-        const maxPosition = -totalWidth;
+      function moveCarousel(direction) {
+          const step = updateStep();
+          const totalWidth = updateTotalWidth();
+          const maxPosition = -totalWidth;
 
-        currentPosition += direction * step;
+          currentPosition += direction * step;
 
-        if (currentPosition <= maxPosition) {
-            slides.style.transition = 'none';
-            currentPosition = 0;
-            slides.style.transform = `translateX(${currentPosition}px)`;
-            setTimeout(() => {
-                slides.style.transition = 'transform 0.3s ease-in-out';
-            }, 50);
-        } else if (currentPosition > 0) {
-            slides.style.transition = 'none';
-            currentPosition = maxPosition;
-            slides.style.transform = `translateX(${currentPosition}px)`;
-            setTimeout(() => {
-                slides.style.transition = 'transform 0.3s ease-in-out';
-            }, 50);
-        } else {
-            slides.style.transition = 'transform 0.3s ease-in-out';
-            slides.style.transform = `translateX(${currentPosition}px)`;
-        }
-    }
+          if (currentPosition <= maxPosition) {
+              slides.style.transition = 'none';
+              currentPosition = 0;
+              slides.style.transform = `translateX(${currentPosition}px)`;
+              setTimeout(() => {
+                  slides.style.transition = 'transform 0.3s ease-in-out';
+              }, 50);
+          } else if (currentPosition > 0) {
+              slides.style.transition = 'none';
+              currentPosition = maxPosition;
+              slides.style.transform = `translateX(${currentPosition}px)`;
+              setTimeout(() => {
+                  slides.style.transition = 'transform 0.3s ease-in-out';
+              }, 50);
+          } else {
+              slides.style.transition = 'transform 0.3s ease-in-out';
+              slides.style.transform = `translateX(${currentPosition}px)`;
+          }
+      }
 
-    document.getElementById(nextId).addEventListener('click', () => moveCarousel(-1));
-    document.getElementById(prevId).addEventListener('click', () => moveCarousel(1));
+      document.getElementById(nextId).addEventListener('click', () => moveCarousel(-1));
+      document.getElementById(prevId).addEventListener('click', () => moveCarousel(1));
 
-    slides.addEventListener('click', function(event) {
-        if (window.innerWidth > 640) {
-            const button = event.target.closest('.boton-agregar');
-            if (button) {
-                addToCart(event);
-            }
-        }
-    });
+      slides.addEventListener('click', function(event) {
+          if (window.innerWidth > 640) {
+              const button = event.target.closest('.boton-agregar');
+              if (button) {
+                  addToCart(event);
+              }
+          }
+      });
 
-    carousel.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY; // Capturamos la posición inicial en Y
-        isDragging = true;
-        moved = false; // Reiniciamos la bandera
-        movedDistanceX = 0;
-        movedDistanceY = 0;
-        slides.style.transition = 'none';
-    }, { passive: true });
+      carousel.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+          isDragging = true;
+          moved = false;
+          movedDistanceX = 0;
+          movedDistanceY = 0;
+          slides.style.transition = 'none';
+      }, { passive: true });
 
-    carousel.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        const currentX = e.touches[0].clientX;
-        const currentY = e.touches[0].clientY; // Capturamos la posición actual en Y
-        movedDistanceX = currentX - startX;
-        movedDistanceY = currentY - startY; // Calculamos el desplazamiento en Y
+      carousel.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          const currentX = e.touches[0].clientX;
+          const currentY = e.touches[0].clientY;
+          movedDistanceX = currentX - startX;
+          movedDistanceY = currentY - startY;
 
-        // Si el movimiento en X o Y excede el umbral, consideramos que hubo deslizamiento
-        if (Math.abs(movedDistanceX) > 30 || Math.abs(movedDistanceY) > 30) {
-            moved = true; // Indicamos que hubo movimiento significativo
-        }
+          if (Math.abs(movedDistanceX) > 30 || Math.abs(movedDistanceY) > 30) {
+              moved = true;
+          }
 
-        // Solo movemos el carrusel en el eje X
-        slides.style.transform = `translateX(${currentPosition + movedDistanceX}px)`;
-    }, { passive: true });
+          slides.style.transform = `translateX(${currentPosition + movedDistanceX}px)`;
+      }, { passive: true });
 
-    carousel.addEventListener('touchend', (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        const endX = e.changedTouches[0].clientX;
-        const endY = e.changedTouches[0].clientY; // Capturamos la posición final en Y
-        const diffX = endX - startX;
-        const diffY = endY - startY; // Calculamos la diferencia en Y
+      carousel.addEventListener('touchend', (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+          const endX = e.changedTouches[0].clientX;
+          const endY = e.changedTouches[0].clientY;
+          const diffX = endX - startX;
+          const diffY = endY - startY;
 
-        // Si hay movimiento significativo en X, movemos el carrusel
-        if (Math.abs(diffX) > 30) {
-            currentPosition += diffX;
-            slides.style.transition = 'transform 0.3s ease-in-out';
-            const totalWidth = updateTotalWidth();
-            if (currentPosition <= -totalWidth) currentPosition = 0;
-            if (currentPosition > 0) currentPosition = -totalWidth;
-            slides.style.transform = `translateX(${currentPosition}px)`;
-        }
-        // Si no hubo movimiento significativo en X ni en Y, consideramos un toque estático
-        else if (!moved && Math.abs(diffX) <= 30 && Math.abs(diffY) <= 30) {
-            const button = e.target.closest('.boton-agregar');
-            if (button) {
-                addToCart(e);
-            }
-        }
-    }, { passive: true });
+          if (Math.abs(diffX) > 30) {
+              currentPosition += diffX;
+              slides.style.transition = 'transform 0.3s ease-in-out';
+              const totalWidth = updateTotalWidth();
+              if (currentPosition <= -totalWidth) currentPosition = 0;
+              if (currentPosition > 0) currentPosition = -totalWidth;
+              slides.style.transform = `translateX(${currentPosition}px)`;
+          } else if (!moved && Math.abs(diffX) <= 30 && Math.abs(diffY) <= 30) {
+              const button = e.target.closest('.boton-agregar');
+              if (button) {
+                  addToCart(e);
+              }
+          }
+      }, { passive: true });
 
-    let autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
-    carousel.addEventListener('mouseenter', () => clearInterval(autoSlideCarousel));
-    carousel.addEventListener('mouseleave', () => {
-        autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
-    });
+      let autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
+      carousel.addEventListener('mouseenter', () => clearInterval(autoSlideCarousel));
+      carousel.addEventListener('mouseleave', () => {
+          autoSlideCarousel = setInterval(() => moveCarousel(-1), 5000);
+      });
 
-    window.addEventListener('resize', () => {
-        currentPosition = 0;
-        slides.style.transform = `translateX(${currentPosition}px)`;
-    });
+      window.addEventListener('resize', () => {
+          currentPosition = 0;
+          slides.style.transform = `translateX(${currentPosition}px)`;
+      });
 
-    slides.style.width = `${updateTotalWidth() * 2}px`;
-}
-
+      slides.style.width = `${updateTotalWidth() * 2}px`;
+  }
 
   // Inicialización al cargar la página
   document.addEventListener('DOMContentLoaded', () => {
@@ -1713,29 +1695,6 @@ footer a:hover .social-icon {
 </script>
 
 
-
-</script>
-<link rel="stylesheet" href="https://use.typekit.net/your-kit-id.css">
-
-
-
-  
-    <script type="module" src="https://wa.link/eej87k"></script>
-
- 
-<!-- badge start-->
-<a class="Tienda-Sport" id="TiendaSport" href="https://wa.link/eej87k" target="_blank">
-  <img src="c:\Users\yilbr\Downloads\whatsapp.png" alt="Whatsap-badge">
-  Whatsapp
-</a>
-
-
-
-
-<!-- Pie de página -->
-<footer class="py-10 bg-white dark:bg-slate-800">
-  <!-- Código del footer pegado aquí -->
-</footer>
 
 </body>
 </html>
